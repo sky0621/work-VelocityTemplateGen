@@ -3,6 +3,7 @@ package xyz.skycat.work.VelocityTemplateGen.input.by;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import xyz.skycat.work.VelocityTemplateGen.Config;
+import xyz.skycat.work.VelocityTemplateGen.construction.ConvertInfo;
 import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
 import xyz.skycat.work.VelocityTemplateGen.construction.VelocityTemplateInfo;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
@@ -41,7 +42,17 @@ public class ExcelParser implements Parser {
                 ExampleSentence exampleSentence = new ExampleSentence(getRowNum(noCell), getExampleSentence(exampleCell));
                 velocityTemplateInfo.exampleSentenceList.add(exampleSentence);
 
-
+                /*
+                 * ここからは置換情報の保持
+                 */
+                Cell targetNoCell = row.getCell(Config.targetNoColumnIndex);
+                if (checkErrorNoCell(targetNoCell)) {
+                    continue;
+                }
+                Cell targetStrCell = row.getCell(Config.targetStrColumnIndex);
+                Cell convertStrCell = row.getCell(Config.convertStrColumnIndex);
+                ConvertInfo convertInfo = new ConvertInfo(getRowNum(targetNoCell), targetStrCell.getStringCellValue(), convertStrCell.getStringCellValue());
+                velocityTemplateInfo.convertInfoList.add(convertInfo);
             }
         }
         return velocityTemplateInfo;

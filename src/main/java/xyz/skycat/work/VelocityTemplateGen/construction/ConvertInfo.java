@@ -11,10 +11,14 @@ public class ConvertInfo {
 
     public String convertString;
 
+    public ConvertInfo() {
+
+    }
+
     public ConvertInfo(int rowNum, String targetString, String convertString) {
         this.rowNum = rowNum;
         this.targetString = targetString;
-        this.convertString = convertString;
+        this.convertString = "$!{" + convertString + "}";
     }
 
 }

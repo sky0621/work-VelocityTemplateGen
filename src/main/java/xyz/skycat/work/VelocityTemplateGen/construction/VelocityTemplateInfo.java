@@ -14,13 +14,17 @@ public class VelocityTemplateInfo {
 
     public List<ExampleSentence> exampleSentenceList;
 
+    public List<ConvertInfo> convertInfoList;
+
     public VelocityTemplateInfo() {
         this.exampleSentenceList = new ArrayList();
+        this.convertInfoList = new ArrayList();
     }
 
     public VelocityTemplateInfo(String fileName) {
         this.fileName = fileName;
         this.exampleSentenceList = new ArrayList();
+        this.convertInfoList = new ArrayList();
     }
 
     public void setFileName(String fileName) {
