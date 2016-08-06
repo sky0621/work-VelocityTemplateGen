@@ -1,6 +1,7 @@
 package xyz.skycat.work.VelocityTemplateGen;
 
 import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
+import xyz.skycat.work.VelocityTemplateGen.construction.VelocityTemplateInfo;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
 
 import java.io.IOException;
@@ -26,13 +27,17 @@ public class FileParseVisitor implements FileVisitor<java.nio.file.Path> {
 
     public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
 
-        List<ExampleSentence> exampleSentenceList = null;
+        VelocityTemplateInfo velocityTemplateInfo = null;
         try {
-            exampleSentenceList = parser.parse(file);
+            velocityTemplateInfo = parser.parse(file);
 
-            for(ExampleSentence es : exampleSentenceList) {
+            for(ExampleSentence es : velocityTemplateInfo.exampleSentenceList) {
                 System.out.println(String.format("[%d]: %s", es.rowNum, es.sentence));
             }
+
+            String vmFileName = velocityTemplateInfo.getFileName();
+            System.out.println("===========================" + vmFileName + "===========================");
+
         } catch (Throwable t) {
             System.out.println("[FAILED]" + t.toString());
         }

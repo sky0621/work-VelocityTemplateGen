@@ -4,42 +4,47 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import xyz.skycat.work.VelocityTemplateGen.Config;
 import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
+import xyz.skycat.work.VelocityTemplateGen.construction.VelocityTemplateInfo;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by SS on 2016/08/07.
  */
 public class ExcelParser implements Parser {
 
-    public List<ExampleSentence> parse(Path inputPath) throws IOException, InvalidFormatException {
+    public VelocityTemplateInfo parse(Path inputPath) throws IOException, InvalidFormatException {
 
-        List<ExampleSentence> exampleSentenceList = new ArrayList();
+        VelocityTemplateInfo velocityTemplateInfo = new VelocityTemplateInfo();
 
         Workbook workbook = WorkbookFactory.create(inputPath.toFile());
         for (Sheet sheet : workbook) {
             for (Row row : sheet) {
                 int rowNum = row.getRowNum();
-                if (rowNum < Config.exampleSentenceStartRowNum) {
+                if (rowNum == Config.vmFileNameLineIndex) {
+                    Cell vmFileNameCell = row.getCell(Config.vmFileNameColumnIndex);
+                    velocityTemplateInfo.setFileName(vmFileNameCell.getStringCellValue());
+                }
+                if (rowNum < Config.exampleSentenceStartLineIndex) {
                     continue;
                 }
-                Cell noCell = row.getCell(0);
+                Cell noCell = row.getCell(Config.noColumnIndex);
                 if (checkErrorNoCell(noCell)) {
                     continue;
                 }
-                Cell exampleCell = row.getCell(2);
+                Cell exampleCell = row.getCell(Config.exampleColumnIndex);
                 if (checkErrorExampleCell(exampleCell)) {
                     continue;
                 }
                 ExampleSentence exampleSentence = new ExampleSentence(getRowNum(noCell), getExampleSentence(exampleCell));
-                exampleSentenceList.add(exampleSentence);
+                velocityTemplateInfo.exampleSentenceList.add(exampleSentence);
+
+
             }
         }
-        return exampleSentenceList;
+        return velocityTemplateInfo;
     }
 
     private boolean checkErrorNoCell(Cell noCell) {

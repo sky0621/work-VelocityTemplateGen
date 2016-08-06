@@ -9,15 +9,19 @@ import java.nio.file.Paths;
 public class Argument {
 
     public Path targetRootPath = null;
+//    public Path outputPath = null;
 
     public Argument(String... args) {
 
-        if (args == null || args.length == 0) {
-            throw new IllegalArgumentException("少なくとも読み込み対象ファイルのルートディレクトリ（フルパス）を指定する必要があります。");
+        if (args == null || args.length != 2) {
+            throw new IllegalArgumentException("読み込み対象ファイルのルートディレクトリ（フルパス）とVMファイルの出力先ディレクトリ（フルパス）を指定する必要があります。");
         }
 
         String targetRootPathStr = args[0];
         targetRootPath = Paths.get(targetRootPathStr);
+
+        String outputPathStr = args[1];
+        Config.outputPath = Paths.get(outputPathStr);
     }
 
 }
