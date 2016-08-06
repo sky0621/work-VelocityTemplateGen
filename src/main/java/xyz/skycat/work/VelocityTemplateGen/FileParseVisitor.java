@@ -1,15 +1,13 @@
 package xyz.skycat.work.VelocityTemplateGen;
 
+import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.FileVisitor;
-import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by SS on 2016/08/07.
@@ -28,11 +26,14 @@ public class FileParseVisitor implements FileVisitor<java.nio.file.Path> {
 
     public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
 
-        List<Map<Integer, String>> exampleSentenceList = null;
+        List<ExampleSentence> exampleSentenceList = null;
         try {
             exampleSentenceList = parser.parse(file);
 
-        } catch(Throwable t) {
+            for(ExampleSentence es : exampleSentenceList) {
+                System.out.println(String.format("[%d]: %s", es.rowNum, es.sentence));
+            }
+        } catch (Throwable t) {
             System.out.println("[FAILED]" + t.toString());
         }
 
