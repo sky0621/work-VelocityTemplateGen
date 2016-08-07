@@ -55,4 +55,4 @@ $!{takeOffMethod}
 
 ------
 
-＜共通フッター＞
+$!{$INCLUDE$footer}

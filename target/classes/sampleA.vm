@@ -20,7 +20,7 @@ $!{floorNo}階 $!{floorNo}3列 $!{seatNoFrom}番$!{fromToConnectStr}$!{seatNoTo}
 
 ■決済方法
 $!{paymentMethod}
-登録名:VISA
+登録名:$!{paymentType}
 ■引取方法
 $!{takeOffMethod}
 お届け先:基本情報

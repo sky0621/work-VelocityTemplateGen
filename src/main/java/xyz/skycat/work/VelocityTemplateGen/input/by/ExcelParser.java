@@ -20,9 +20,12 @@ public class ExcelParser implements Parser {
 
         VelocityTemplateInfo velocityTemplateInfo = new VelocityTemplateInfo();
 
-        Workbook workbook = WorkbookFactory.create(inputPath.toFile());
+        Workbook workbook = WorkbookFactory.create(inputPath.toFile(), null, true);
         for (Sheet sheet : workbook) {
             for (Row row : sheet) {
+                /*
+                 * まずは解析開始行か判定
+                 */
                 int rowNum = row.getRowNum();
                 if (rowNum == Config.vmFileNameLineIndex) {
                     Cell vmFileNameCell = row.getCell(Config.vmFileNameColumnIndex);
@@ -31,6 +34,10 @@ public class ExcelParser implements Parser {
                 if (rowNum < Config.exampleSentenceStartLineIndex) {
                     continue;
                 }
+
+                /*
+                 * メール文例の保持
+                 */
                 Cell noCell = row.getCell(Config.noColumnIndex);
                 if (checkErrorNoCell(noCell)) {
                     continue;

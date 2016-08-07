@@ -35,6 +35,9 @@ public class FileParseVisitor implements FileVisitor<java.nio.file.Path> {
             String vmFileNameFullPath = velocityTemplateInfo.getFileName();
             outputInit(vmFileNameFullPath);
 
+            /*
+             * メール文例の変動項目を置換変数に変えていく
+             */
             for (ExampleSentence es : velocityTemplateInfo.exampleSentenceList) {
                 int rowNum = es.rowNum;
                 String outStr = es.sentence;
