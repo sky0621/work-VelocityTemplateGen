@@ -1,0 +1,47 @@
+#if($!{bean.aFlg})
+#if($!{bean.partsAaText})
+$!{bean.partsAaText}
+#end
+#else
+#if($!{bean.partsBbText})
+$!{bean.partsBbText}
+#end
+#end
+冒頭の１文です。
+----------------------------------------
+
+「$!{bean.shopName}」へ、～～～～しました。
+なにかしらの説明文言です。
+
+※注釈をいろいろ
+
+#set($parts = $bean.explainBean)
+#parse("mail/template/parts/explain.vm")
+
+#if($!{bean.aFlg})
+#set($parts = $bean.cancelBean)
+#parse("mail/template/parts/hpds/cancel.vm")
+#else
+#set($parts = $bean.notCancelBean)
+#parse("mail/template/parts/notCancel.vm")
+#end
+
+----------------------------------------
+
+#set($parts = $bean.noticeBean)
+#parse("mail/template/parts/notice.vm")
+
+----------------------------------------
+
+#if($!{bean.showFlg})
+このフラグが立っている時の説明。
+#if($!{bean.smpFlg})
+　https://$!{bean.domain}/str$!{bean.shopId}/#subId
+フィーチャーフォンを利用されている方は、PC、スマートフォンから確認下さい。
+#else
+　https://$!{bean.domain}/str$!{bean.shopId}/map/#subId
+#end
+#end
+
+#set($parts = $bean.footerBean)
+#parse("mail/template/parts/footer.vm")
