@@ -11,6 +11,6 @@ import java.nio.file.Path;
  */
 public interface Parser {
 
-    VelocityTemplateInfo parse(Path inputPath) throws IOException, InvalidFormatException;
+    VelocityTemplateInfo parse(Path inputPath) throws IOException;
 
 }

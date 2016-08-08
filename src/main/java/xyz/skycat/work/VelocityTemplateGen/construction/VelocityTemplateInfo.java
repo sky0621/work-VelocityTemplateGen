@@ -12,19 +12,15 @@ public class VelocityTemplateInfo {
 
     private String fileName;
 
+    private boolean vmTypeMain;
+
     public List<ExampleSentence> exampleSentenceList;
 
-    public List<ConvertInfo> convertInfoList;
+    public List<DisplaySpecification> displaySpecificationList;
 
     public VelocityTemplateInfo() {
         this.exampleSentenceList = new ArrayList();
-        this.convertInfoList = new ArrayList();
-    }
-
-    public VelocityTemplateInfo(String fileName) {
-        this.fileName = fileName;
-        this.exampleSentenceList = new ArrayList();
-        this.convertInfoList = new ArrayList();
+        this.displaySpecificationList = new ArrayList();
     }
 
     public void setFileName(String fileName) {
@@ -34,6 +30,15 @@ public class VelocityTemplateInfo {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public void setVmType(String vmType) {
+        if (vmType == null || "".equals(vmType)) return;
+        this.vmTypeMain = vmType.equals(Config.vmTypeMain);
+    }
+
+    public boolean isVmTypeMain() {
+        return this.vmTypeMain;
     }
 
 }

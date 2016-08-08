@@ -3,7 +3,7 @@ package xyz.skycat.work.VelocityTemplateGen.input.by;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import xyz.skycat.work.VelocityTemplateGen.Config;
-import xyz.skycat.work.VelocityTemplateGen.construction.ConvertInfo;
+import xyz.skycat.work.VelocityTemplateGen.construction.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
 import xyz.skycat.work.VelocityTemplateGen.construction.VelocityTemplateInfo;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
@@ -16,11 +16,18 @@ import java.nio.file.Path;
  */
 public class ExcelParser implements Parser {
 
-    public VelocityTemplateInfo parse(Path inputPath) throws IOException, InvalidFormatException {
+    private boolean displaySpecificationParseOn = false;
+
+    public VelocityTemplateInfo parse(Path inputPath) throws IOException {
 
         VelocityTemplateInfo velocityTemplateInfo = new VelocityTemplateInfo();
 
-        Workbook workbook = WorkbookFactory.create(inputPath.toFile(), null, true);
+        Workbook workbook = null;
+        try {
+            workbook = WorkbookFactory.create(inputPath.toFile(), null, true);
+        } catch (InvalidFormatException ife) {
+            throw new IOException(ife);
+        }
         for (Sheet sheet : workbook) {
             for (Row row : sheet) {
                 /*
@@ -30,6 +37,13 @@ public class ExcelParser implements Parser {
                 if (rowNum == Config.vmFileNameLineIndex) {
                     Cell vmFileNameCell = row.getCell(Config.vmFileNameColumnIndex);
                     velocityTemplateInfo.setFileName(vmFileNameCell.getStringCellValue());
+                    Cell vmMainOrPartsCell = row.getCell(Config.vmMainOrPartsColumnIndex);
+                    velocityTemplateInfo.setVmType(vmMainOrPartsCell.getStringCellValue());
+                    if (velocityTemplateInfo.isVmTypeMain()) {
+                        Config.prefixConvertString = "bean.";
+                    } else {
+                        Config.prefixConvertString = "parts.";
+                    }
                 }
                 if (rowNum < Config.exampleSentenceStartLineIndex) {
                     continue;
@@ -53,13 +67,20 @@ public class ExcelParser implements Parser {
                  * ここからは置換情報の保持
                  */
                 Cell targetNoCell = row.getCell(Config.targetNoColumnIndex);
-                if (checkErrorNoCell(targetNoCell)) {
+                if (checkErrorTargetNoCell(targetNoCell)) {
                     continue;
                 }
-                Cell targetStrCell = row.getCell(Config.targetStrColumnIndex);
-                Cell convertStrCell = row.getCell(Config.convertStrColumnIndex);
-                ConvertInfo convertInfo = new ConvertInfo(getRowNum(targetNoCell), targetStrCell.getStringCellValue(), convertStrCell.getStringCellValue());
-                velocityTemplateInfo.convertInfoList.add(convertInfo);
+                Cell explainCell = row.getCell(Config.explainColumnIndex);          // 説明
+                Cell targetStrCell = row.getCell(Config.targetStrColumnIndex);      // 置換対象
+                Cell convertStrCell = row.getCell(Config.convertStrColumnIndex);    // 置換変数
+                Cell convertTypeCell = row.getCell(Config.convertTypeColumnIndex);  // 型
+                DisplaySpecification displaySpecification = new DisplaySpecification(
+                        getRowNum(targetNoCell),
+                        explainCell.getStringCellValue(),
+                        targetStrCell.getStringCellValue(),
+                        convertStrCell.getStringCellValue(),
+                        convertTypeCell.getStringCellValue());
+                velocityTemplateInfo.displaySpecificationList.add(displaySpecification);
             }
         }
         return velocityTemplateInfo;
@@ -71,6 +92,30 @@ public class ExcelParser implements Parser {
         }
         try {
             Object cellValue = getCellValue(noCell);
+            if (cellValue instanceof Double) {
+                Double dVal = (Double) cellValue;
+                dVal.intValue();
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
+
+    private boolean checkErrorTargetNoCell(Cell noCell) {
+        if (noCell == null) {
+            return true;
+        }
+        try {
+            Object cellValue = getCellValue(noCell);
+            if (cellValue instanceof String) {
+                if (Config.displaySpecificationMarkingString.equals((String) cellValue)) {
+                    displaySpecificationParseOn = true;
+                }
+                return true;
+            }
             if (cellValue instanceof Double) {
                 Double dVal = (Double) cellValue;
                 dVal.intValue();

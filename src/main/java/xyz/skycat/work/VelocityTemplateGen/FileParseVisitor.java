@@ -1,6 +1,6 @@
 package xyz.skycat.work.VelocityTemplateGen;
 
-import xyz.skycat.work.VelocityTemplateGen.construction.ConvertInfo;
+import xyz.skycat.work.VelocityTemplateGen.construction.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.construction.ExampleSentence;
 import xyz.skycat.work.VelocityTemplateGen.construction.VelocityTemplateInfo;
 import xyz.skycat.work.VelocityTemplateGen.input.Parser;
@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.List;
 
 /**
  * Created by SS on 2016/08/07.
@@ -28,32 +27,38 @@ public class FileParseVisitor implements FileVisitor<java.nio.file.Path> {
 
     public FileVisitResult visitFile(java.nio.file.Path file, BasicFileAttributes attrs) throws IOException {
 
-        VelocityTemplateInfo velocityTemplateInfo = null;
-        try {
-            velocityTemplateInfo = parser.parse(file);
+        VelocityTemplateInfo velocityTemplateInfo = parser.parse(file);
 
-            String vmFileNameFullPath = velocityTemplateInfo.getFileName();
-            outputInit(vmFileNameFullPath);
+        String vmFileNameFullPath = velocityTemplateInfo.getFileName();
+        outputInit(vmFileNameFullPath);
 
-            /*
-             * メール文例の変動項目を置換変数に変えていく
-             */
-            for (ExampleSentence es : velocityTemplateInfo.exampleSentenceList) {
-                int rowNum = es.rowNum;
-                String outStr = es.sentence;
-                for (ConvertInfo ci : velocityTemplateInfo.convertInfoList) {
-                    int chgRowNum = ci.rowNum;
-                    if(rowNum == chgRowNum) {
-                        String targetStr = ci.targetString;
-                        String convStr = ci.convertString;
-                        outStr = outStr.replace(targetStr, convStr);
+        /*
+         * メール文例の変動項目を置換変数に変えていく
+         */
+        for (ExampleSentence es : velocityTemplateInfo.exampleSentenceList) {
+            int rowNum = es.rowNum;
+            String outStr = es.sentence;
+            for (DisplaySpecification ci : velocityTemplateInfo.displaySpecificationList) {
+                int chgRowNum = ci.rowNum;
+                if (rowNum == chgRowNum) {
+                    String targetStr = ci.targetString;
+                    String convStr = ci.convertString;
+                    outStr = outStr.replace(targetStr, convStr);
+                    // インクルード文言の場合
+                    if (outStr.startsWith(Config.includeConvertStr)) {
+                        String vmName = outStr.replace(Config.includeConvertStr, "");
+                        outStr = "#parse(\"" + Config.includeVMpath + vmName + ".vm\")";
+                        String setStr = null;
+                        if(velocityTemplateInfo.isVmTypeMain()) {
+                            setStr = "#set($parts = $bean." + vmName + "Bean)";
+                        } else {
+                            setStr = "#set($parts = $parts." + vmName + "Bean)";
+                        }
+                        output(vmFileNameFullPath, setStr);
                     }
                 }
-                output(vmFileNameFullPath, outStr);
             }
-
-        } catch (Throwable t) {
-            System.out.println("[FAILED]" + t.toString());
+            output(vmFileNameFullPath, outStr);
         }
 
         return FileVisitResult.CONTINUE;
