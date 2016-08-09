@@ -1,0 +1,37 @@
+#if(${bean.pcHeaderPartsText})
+$!{bean.pcHeaderPartsText}
+#end
+åªéûì_Ç≈Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~ÅB
+----------------------------------------
+
+Åu$!{bean.storeName}ÅvÇ÷ÅAÅ~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~ÇµÇ‹ÇµÇΩÅB
+Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~ÇÇ®äËÇ¢Ç¢ÇΩÇµÇ‹Ç∑ÅB
+
+Å¶Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~
+
+#set($parts = $bean.ContentFullBean)
+#parse("mail/template/parts/content_full.vm")
+
+#set($parts = $bean.CancelPeriodBean)
+#parse("mail/template/parts/cancel_period.vm")
+
+----------------------------------------
+
+#set($parts = $bean.NoticeBean)
+#parse("mail/template/parts/notice.vm")
+
+----------------------------------------
+
+#if(${bean.showLink})
+Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Ç†ÇËÇ‹Ç∑ÅB
+Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~ÅH
+#if(${bean.spLink})
+Å@https://$!{bean.domain}/abcde
+Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~
+#else
+Å@https://$!{bean.domain}/xyzjk
+#end
+#end
+
+#set($parts = $bean.FooterBean)
+#parse("mail/template/parts/footer.vm")

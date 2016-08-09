@@ -1,0 +1,8 @@
+#if(${bean.pcHeaderPartsText})
+$!{bean.pcHeaderPartsText}
+#end
+Åu$!{bean.storeName}ÅvÇÃÅ~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~ÅB
+Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Å~Ç≠ÇæÇ≥Ç¢ÅB
+
+#set($parts = $bean.CancelBean)
+#parse("mail/template/parts/cancel.vm")

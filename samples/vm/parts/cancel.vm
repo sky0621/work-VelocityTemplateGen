@@ -1,0 +1,27 @@
+#set($content = $parts.ContentCancelBean)
+#set($notice = $parts.NoticeBean)
+#set($otherFooter = $parts.otherFooterBean)
+#set($Footer = $parts.FooterBean)
+----------------------------------------
+~~~~“úF$!{parts.insDate}
+~~ƒLƒƒƒ“ƒZƒ‹“úF$!{parts.cancelDate}
+----------------------------------------
+
+¦~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~‚­‚¾‚³‚¢
+
+#set($parts = $content)
+#parse("mail/template/parts/content_cancel.vm")
+
+
+#set($parts = $notice)
+#parse("mail/template/parts/notice.vm")
+
+----------------------------------------
+
+#if(${parts.other})
+#set($parts = $otherFooter)
+#parse("mail/template/parts/other/footer.vm")
+#else
+#set($parts = $Footer)
+#parse("mail/template/parts/footer.vm")
+#end
