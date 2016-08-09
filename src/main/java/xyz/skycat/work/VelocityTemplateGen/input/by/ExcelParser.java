@@ -58,10 +58,11 @@ public class ExcelParser implements Parser {
                 }
                 Cell exampleCell = row.getCell(Config.exampleColumnIndex);
                 if (checkErrorExampleCell(exampleCell)) {
-                    continue;
+//                    continue;
+                } else {
+                    ExampleSentence exampleSentence = new ExampleSentence(getRowNum(noCell), getExampleSentence(exampleCell));
+                    velocityTemplateInfo.exampleSentenceList.add(exampleSentence);
                 }
-                ExampleSentence exampleSentence = new ExampleSentence(getRowNum(noCell), getExampleSentence(exampleCell));
-                velocityTemplateInfo.exampleSentenceList.add(exampleSentence);
 
                 /*
                  * ここからは置換情報の保持

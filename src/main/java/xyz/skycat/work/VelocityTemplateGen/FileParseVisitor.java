@@ -9,6 +9,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Comparator;
+
+import static java.util.Comparator.*;
+import static java.util.Comparator.comparing;
 
 /**
  * Created by SS on 2016/08/07.
@@ -31,6 +35,10 @@ public class FileParseVisitor implements FileVisitor<java.nio.file.Path> {
 
         String vmFileNameFullPath = velocityTemplateInfo.getFileName();
         outputInit(vmFileNameFullPath);
+
+        // 要素を長さ重視で並べ替え（置換時に、同一行で「1」と「13」のように重複値がある場合、
+        // 最短値からマッチすると正しい変換が得られないため、最長値からマッチするように並べ替える必要がある。）
+        velocityTemplateInfo.displaySpecificationList.sort(comparing(x -> x.targetString.length(), reverseOrder()));
 
         /*
          * メール文例の変動項目を置換変数に変えていく
