@@ -9,6 +9,9 @@ public class ConfigGenVm {
 
     private String outputDir;
 
+    // VMファイル名がある行
+    private int vmFileNameLineIndex = 1;
+
     public String getInputDir() {
         return inputDir;
     }
@@ -27,4 +30,11 @@ public class ConfigGenVm {
         this.outputDir = outputDir;
     }
 
+    public int getVmFileNameLineIndex() {
+        return vmFileNameLineIndex;
+    }
+
+    public void setVmFileNameLineIndex(int vmFileNameLineIndex) {
+        this.vmFileNameLineIndex = vmFileNameLineIndex;
+    }
 }

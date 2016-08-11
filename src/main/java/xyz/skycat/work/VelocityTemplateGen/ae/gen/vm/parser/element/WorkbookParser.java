@@ -17,7 +17,6 @@ public class WorkbookParser {
 
         List<Optional<VelocityTemplate>> velocityTemplateList = new ArrayList<>();
         for (Sheet sheet : workbook) {
-
             velocityTemplateList.add(new SheetParser().parse(sheet));
         }
         return velocityTemplateList;

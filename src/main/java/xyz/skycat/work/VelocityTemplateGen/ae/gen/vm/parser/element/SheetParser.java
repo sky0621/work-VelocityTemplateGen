@@ -17,10 +17,10 @@ public class SheetParser {
 
         VelocityTemplate velocityTemplate = new VelocityTemplate();
         for (Row row : sheet) {
-
-            // FIXME 行レベルパース
+            if(new RowParser().parse(row, velocityTemplate)) {
+                continue;
+            }
         }
-
         return Optional.ofNullable(velocityTemplate);
     }
 

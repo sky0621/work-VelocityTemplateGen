@@ -34,19 +34,19 @@ public class JavaFXMain extends Application {
         Label explain = new Label();
         explain.setText("指定のフォーマットで書かれたExcelファイルが置かれたディレクトリと生成物の出力先を指定してください。初期状態では sample ディレクトリ配下を指定しています。");
 
-        ConfigGenVm configGenVm = ConfigGenerator.createConfigGenVm();
+        ConfigGenVm configGenVm = ConfigGenerator.createConfigGenVm().get();
 
         Label inputDirExplain = new Label();
         inputDirExplain.setText("Excelファイル格納ルートディレクトリをフルパスで入力：");
 
         inputDirTField = new TextField();
-        inputDirTField.setText(ConfigGenerator.createConfigGenVm().getInputDir());
+        inputDirTField.setText(configGenVm.getInputDir());
 
         Label outputDirExplain = new Label();
         outputDirExplain.setText("出力ファイル格納ディレクトリをフルパスで入力：");
 
         outputDirTField = new TextField();
-        outputDirTField.setText(ConfigGenerator.createConfigGenVm().getOutputDir());
+        outputDirTField.setText(configGenVm.getOutputDir());
 
         Button parseBtn = new Button();
         parseBtn.setText("生成");
