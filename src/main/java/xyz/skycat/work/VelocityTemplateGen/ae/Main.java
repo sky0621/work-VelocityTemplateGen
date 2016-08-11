@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String... args) {
         try {
-            new Executor().run(new Argument(args));
+            new Executor().run();
             System.exit(0);
         } catch (Throwable t) {
             t.printStackTrace();

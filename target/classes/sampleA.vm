@@ -10,12 +10,12 @@ $!{bean.userName}様
 会場名:$!{bean.eventPlace}
 ■購入チケット情報
 全席指定  $!{bean.ticketCount}枚  
-1階 $!{bean.columnsNo}列 $!{bean.seatNoFrom}番$!{bean.fromToConnectStr}$!{bean.seatNoTo}番
+$!{bean.floorNo}階 $!{bean.columnsNo}列 $!{bean.seatNoFrom}番$!{bean.fromToConnectStr}$!{bean.seatNoTo}番
 ■料金明細
 チケット料金:全席指定 $!{bean.ticketCount}枚 計$!{bean.ticketTotalAmount}円
 システム利用料:$!{bean.systemUseAmount}円 × $!{bean.ticketCount}枚 計 $!{bean.systemUseTotalAmount}円
 配送手数料:$!{bean.shippingCharges}円
-合計金額:計 10,625円
+合計金額:計 $!{bean.totalAmount}円
 ■決済方法
 $!{bean.paymentMethod}
 登録名:$!{bean.paymentType}
