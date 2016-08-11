@@ -1,21 +1,24 @@
 package xyz.skycat.work.VelocityTemplateGen.ae;
 
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.ExcelParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.Parser;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by SS on 2016/08/07.
  */
-public class FileParseVisitor implements FileVisitor<Path> {
+public class ExcelFileParseVisitor implements FileVisitor<Path> {
 
-    private Parser parser;
+    private ExcelParser parser;
 
-    public FileParseVisitor(Parser parser) {
+    public ExcelFileParseVisitor(ExcelParser parser) {
         this.parser = parser;
     }
 
@@ -25,7 +28,9 @@ public class FileParseVisitor implements FileVisitor<Path> {
 
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 
-        VelocityTemplate velocityTemplateInfo = parser.parse(file);
+        Optional<List<Optional<VelocityTemplate>>> velocityTemplateOptional = parser.parse(file);
+
+        // FIXME パース結果の出力！
 
         return FileVisitResult.CONTINUE;
     }

@@ -13,7 +13,7 @@ public class Executor {
 
     public void run() throws IOException {
 
-        FileParseVisitor visitor = new FileParseVisitor(new ExcelParser());
+        ExcelFileParseVisitor visitor = new ExcelFileParseVisitor(new ExcelParser());
         Files.walkFileTree(Paths.get(ConfigGenerator.createConfigGenVm().getInputDir()), visitor);
     }
 
