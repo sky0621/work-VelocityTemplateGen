@@ -20,7 +20,6 @@ public class ConfigGenerator {
                 configGenVm = new Yaml().loadAs(new FileReader("config_genvm.yaml"), ConfigGenVm.class);
             } catch (FileNotFoundException e) {
                 // TODO Logger使用
-                e.printStackTrace();
                 return null;
             }
         }

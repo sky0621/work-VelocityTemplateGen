@@ -5,10 +5,6 @@ package xyz.skycat.work.VelocityTemplateGen.ae;
  */
 public class Main {
 
-    // Executor.run 起動
-    // JavaFX による UI 提供
-    // YAML で設定（どの行から解析するか等）を保存
-    // 処理対象セルに応じたクラスを用意（パース時のチェックや情報保持媒体として使う）
     // [機能]
     // 1.Excel解析⇒VMファイル生成
     // 2.VMファイル⇒Beanクラス生成
@@ -16,9 +12,11 @@ public class Main {
 
     public static void main(String... args) {
         try {
-            new Executor().run();
+            Argument argument = new Argument(args);
+            new Executor().run(ExecMode.getByArgumentValue(argument.getExecMode()));
             System.exit(0);
         } catch (Throwable t) {
+            // TODO Logger使用
             t.printStackTrace();
             System.exit(-1);
         }

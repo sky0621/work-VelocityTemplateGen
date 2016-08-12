@@ -9,9 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import xyz.skycat.work.VelocityTemplateGen.ae.ConfigGenVm;
-import xyz.skycat.work.VelocityTemplateGen.ae.ConfigGenerator;
-import xyz.skycat.work.VelocityTemplateGen.ae.Executor;
+import xyz.skycat.work.VelocityTemplateGen.ae.*;
+
+import static xyz.skycat.work.VelocityTemplateGen.ae.ErrorMessage.FAILURE_READ_CONFIG_GENVM;
+import static xyz.skycat.work.VelocityTemplateGen.ae.ExecMode.GEN_VM;
 
 /**
  * Created by SS on 2016/08/12.
@@ -34,7 +35,7 @@ public class JavaFXMain extends Application {
         Label explain = new Label();
         explain.setText("指定のフォーマットで書かれたExcelファイルが置かれたディレクトリと生成物の出力先を指定してください。初期状態では sample ディレクトリ配下を指定しています。");
 
-        ConfigGenVm configGenVm = ConfigGenerator.createConfigGenVm().get();
+        ConfigGenVm configGenVm = ConfigGenerator.createConfigGenVm().orElseThrow(() -> new VelocityTemplateGenException(FAILURE_READ_CONFIG_GENVM));
 
         Label inputDirExplain = new Label();
         inputDirExplain.setText("Excelファイル格納ルートディレクトリをフルパスで入力：");
@@ -54,8 +55,9 @@ public class JavaFXMain extends Application {
             try {
                 configGenVm.setInputDir(inputDirTField.getText());
                 configGenVm.setOutputDir(outputDirTField.getText());
-                new Executor().run();
+                new Executor().run(GEN_VM);
             } catch (Throwable t) {
+                t.printStackTrace();
                 errorLabel.setText(t.getMessage());
             }
         });

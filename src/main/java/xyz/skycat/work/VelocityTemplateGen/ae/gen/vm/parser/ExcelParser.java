@@ -23,11 +23,9 @@ public class ExcelParser {
             workbook = WorkbookFactory.create(excelFilePath.toFile(), null, true);
         } catch (IOException e) {
             // TODO Logger使用
-            e.printStackTrace();
             return null;
         } catch (InvalidFormatException e) {
             // TODO Logger使用
-            e.printStackTrace();
             return null;
         }
         return Optional.ofNullable(new WorkbookParser().parse(workbook));
