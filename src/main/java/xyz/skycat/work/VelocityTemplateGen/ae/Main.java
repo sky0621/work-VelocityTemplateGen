@@ -1,5 +1,7 @@
 package xyz.skycat.work.VelocityTemplateGen.ae;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
+
 /**
  * Created by SS on 2016/08/12.
  */

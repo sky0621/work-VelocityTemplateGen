@@ -1,4 +1,4 @@
-package xyz.skycat.work.VelocityTemplateGen.ae;
+package xyz.skycat.work.VelocityTemplateGen.ae.error;
 
 /**
  * Created by SS on 2016/08/13.

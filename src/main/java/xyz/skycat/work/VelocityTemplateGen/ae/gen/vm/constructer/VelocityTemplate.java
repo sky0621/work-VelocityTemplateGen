@@ -1,27 +1,46 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by SS on 2016/08/12.
  */
 public class VelocityTemplate {
 
-    private String vmFileName;
+    private String templateFileName;
 
-    private String vmType;
+    private String templateFileType;
 
-    public String getVmFileName() {
-        return vmFileName;
+    private List<SampleMail> sampleMailList;
+
+    public VelocityTemplate() {
+        sampleMailList = new ArrayList<>();
     }
 
-    public void setVmFileName(String vmFileName) {
-        this.vmFileName = vmFileName;
+    public String getTemplateFileName() {
+        return templateFileName;
     }
 
-    public String getVmType() {
-        return vmType;
+    public void setTemplateFileName(String templateFileName) {
+        this.templateFileName = templateFileName;
     }
 
-    public void setVmType(String vmType) {
-        this.vmType = vmType;
+    public String getTemplateFileType() {
+        return templateFileType;
+    }
+
+    public void setTemplateFileType(String templateFileType) {
+        this.templateFileType = templateFileType;
+    }
+
+    public List<SampleMail> getSampleMailList() {
+        return sampleMailList;
+    }
+
+    public void setSampleMailList(List<SampleMail> sampleMailList) {
+        this.sampleMailList = sampleMailList;
     }
 }

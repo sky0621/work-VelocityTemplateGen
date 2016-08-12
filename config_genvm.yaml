@@ -1,5 +1,13 @@
+# 入出力
 inputDir: "sample/input"
 outputDir: "sample/output"
-vmFileNameLineIndex: 1
-vmFileNameColumnIndex: 8
-vmTypeColumnIndex: 9
+# 行インデックス
+lineIdx_templateFileName: 1
+lineIdx_sampleMail: 4
+# 列インデックス
+# 　VMファイル名関連行
+colIdx_templateFileName: 8
+colIdx_templateFileType: 9
+# 　サンプルメール関連行
+colIdx_sampleMailNo: 0
+colIdx_sampleMailExample: 2

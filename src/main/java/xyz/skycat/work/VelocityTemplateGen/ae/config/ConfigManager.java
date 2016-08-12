@@ -1,10 +1,10 @@
-package xyz.skycat.work.VelocityTemplateGen.ae;
+package xyz.skycat.work.VelocityTemplateGen.ae.config;
 
 import org.yaml.snakeyaml.Yaml;
+import xyz.skycat.work.VelocityTemplateGen.ae.error.VelocityTemplateGenException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Optional;
 
 /**
  * Created by SS on 2016/08/12.

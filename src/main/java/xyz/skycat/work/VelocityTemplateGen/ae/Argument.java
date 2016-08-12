@@ -1,6 +1,8 @@
 package xyz.skycat.work.VelocityTemplateGen.ae;
 
-import static xyz.skycat.work.VelocityTemplateGen.ae.ErrorMessage.ILLEGAL_ARGUMENT_EXEC;
+import xyz.skycat.work.VelocityTemplateGen.ae.error.VelocityTemplateGenException;
+
+import static xyz.skycat.work.VelocityTemplateGen.ae.error.ErrorMessage.ILLEGAL_ARGUMENT_EXEC;
 
 /**
  * Created by SS on 2016/08/13.

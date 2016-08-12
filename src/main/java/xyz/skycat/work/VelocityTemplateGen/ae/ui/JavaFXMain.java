@@ -10,8 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import xyz.skycat.work.VelocityTemplateGen.ae.*;
+import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigGenVm;
+import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
 
-import static xyz.skycat.work.VelocityTemplateGen.ae.ErrorMessage.FAILURE_READ_CONFIG_GENVM;
 import static xyz.skycat.work.VelocityTemplateGen.ae.ExecMode.GEN_VM;
 
 /**
