@@ -24,6 +24,12 @@ public class RowParser {
         if(!(new SampleMailRowParser().parse(row, velocityTemplate))) {
             return false;
         }
+
+        // 表示仕様の保持
+        if(!(new SampleMailRowParser().parse(row, velocityTemplate))) {
+            return false;
+        }
+
         return true;
     }
 
