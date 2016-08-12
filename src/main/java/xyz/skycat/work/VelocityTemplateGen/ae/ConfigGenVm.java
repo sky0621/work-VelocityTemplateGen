@@ -10,7 +10,13 @@ public class ConfigGenVm {
     private String outputDir;
 
     // VMファイル名がある行
-    private int vmFileNameLineIndex = 1;
+    private int vmFileNameLineIndex;
+
+    // VM物理ファイル名がある列Index
+    private int vmFileNameColumnIndex;    // I列
+
+    // VMが本体か部品であるかがある列Index
+    private int vmTypeColumnIndex;    // J列
 
     public String getInputDir() {
         return inputDir;
@@ -36,5 +42,21 @@ public class ConfigGenVm {
 
     public void setVmFileNameLineIndex(int vmFileNameLineIndex) {
         this.vmFileNameLineIndex = vmFileNameLineIndex;
+    }
+
+    public int getVmFileNameColumnIndex() {
+        return vmFileNameColumnIndex;
+    }
+
+    public void setVmFileNameColumnIndex(int vmFileNameColumnIndex) {
+        this.vmFileNameColumnIndex = vmFileNameColumnIndex;
+    }
+
+    public int getVmTypeColumnIndex() {
+        return vmTypeColumnIndex;
+    }
+
+    public void setVmTypeColumnIndex(int vmTypeColumnIndex) {
+        this.vmTypeColumnIndex = vmTypeColumnIndex;
     }
 }

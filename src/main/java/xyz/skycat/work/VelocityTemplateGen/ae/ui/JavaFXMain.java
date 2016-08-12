@@ -35,7 +35,8 @@ public class JavaFXMain extends Application {
         Label explain = new Label();
         explain.setText("指定のフォーマットで書かれたExcelファイルが置かれたディレクトリと生成物の出力先を指定してください。初期状態では sample ディレクトリ配下を指定しています。");
 
-        ConfigGenVm configGenVm = ConfigGenerator.createConfigGenVm().orElseThrow(() -> new VelocityTemplateGenException(FAILURE_READ_CONFIG_GENVM));
+        ConfigManager.init();
+        ConfigGenVm configGenVm = ConfigManager.configGenVm();
 
         Label inputDirExplain = new Label();
         inputDirExplain.setText("Excelファイル格納ルートディレクトリをフルパスで入力：");

@@ -1,6 +1,6 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm;
 
-import xyz.skycat.work.VelocityTemplateGen.ae.ConfigGenerator;
+import xyz.skycat.work.VelocityTemplateGen.ae.ConfigManager;
 import xyz.skycat.work.VelocityTemplateGen.ae.ExcelFileParseVisitor;
 import xyz.skycat.work.VelocityTemplateGen.ae.GenExecutor;
 import xyz.skycat.work.VelocityTemplateGen.ae.VelocityTemplateGenException;
@@ -20,7 +20,7 @@ public class GenVmExecutor implements GenExecutor {
     public void run() throws VelocityTemplateGenException {
         try {
             ExcelFileParseVisitor visitor = new ExcelFileParseVisitor(new ExcelParser());
-            Files.walkFileTree(Paths.get(ConfigGenerator.createConfigGenVm().orElseThrow(() -> new VelocityTemplateGenException(FAILURE_READ_CONFIG_GENVM)).getInputDir()), visitor);
+            Files.walkFileTree(Paths.get(ConfigManager.configGenVm().getInputDir()), visitor);
         } catch (IOException e) {
             throw new VelocityTemplateGenException(e);
         }

@@ -1,2 +1,5 @@
 inputDir: "sample/input"
 outputDir: "sample/output"
+vmFileNameLineIndex: 1
+vmFileNameColumnIndex: 8
+vmTypeColumnIndex: 9

@@ -9,21 +9,24 @@ import java.util.Optional;
 /**
  * Created by SS on 2016/08/12.
  */
-public class ConfigGenerator {
+public class ConfigManager {
 
     private static ConfigGenVm configGenVm;
 
-    public static Optional<ConfigGenVm> createConfigGenVm() {
+    public static void init() throws VelocityTemplateGenException {
 
         if (configGenVm == null) {
             try {
                 configGenVm = new Yaml().loadAs(new FileReader("config_genvm.yaml"), ConfigGenVm.class);
             } catch (FileNotFoundException e) {
                 // TODO Logger使用
-                return null;
+                throw new VelocityTemplateGenException(e);
             }
         }
-        return Optional.ofNullable(configGenVm);
+    }
+
+    public static ConfigGenVm configGenVm() {
+        return configGenVm;
     }
 
 }

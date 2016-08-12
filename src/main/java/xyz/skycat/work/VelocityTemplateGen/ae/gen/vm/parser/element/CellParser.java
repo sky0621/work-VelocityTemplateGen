@@ -8,6 +8,7 @@ import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.Velocit
  */
 public class CellParser {
 
+    // 副作用。。。
     private VelocityTemplate velocityTemplate;
 
     public CellParser(VelocityTemplate velocityTemplate) {
@@ -16,7 +17,10 @@ public class CellParser {
 
     public boolean parse(VelocityTemplateElement element) {
 
-        return false;
+        // TODO 例外スロー？
+
+        element.doProcess(velocityTemplate);
+        return true;
     }
 
 }

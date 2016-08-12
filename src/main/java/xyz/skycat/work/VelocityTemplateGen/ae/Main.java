@@ -13,6 +13,7 @@ public class Main {
     public static void main(String... args) {
         try {
             Argument argument = new Argument(args);
+            ConfigManager.init();
             new Executor().run(ExecMode.getByArgumentValue(argument.getExecMode()));
             System.exit(0);
         } catch (Throwable t) {
