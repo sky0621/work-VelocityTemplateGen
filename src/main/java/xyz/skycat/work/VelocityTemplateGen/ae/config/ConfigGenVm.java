@@ -50,6 +50,8 @@ public class ConfigGenVm {
     // 「型」がある列Index
     private int colIdx_displaySpecification_convertType;   // J列
 
+    private String outputFileSuffix;
+
     /*
      * 解析行判定マーキング用
      */
@@ -74,6 +76,9 @@ public class ConfigGenVm {
     // VMの種別が「本体」の場合の文字列
     private String templateFileTypeMain;
 
+    // VMファイルのインクルード時のパス
+    private String includeVMpath;
+//
     // ----------------------------------------------------------------------------------------------------------------
     // ゲッター／セッター
     // ----------------------------------------------------------------------------------------------------------------
@@ -230,5 +235,21 @@ public class ConfigGenVm {
 
     public void setTemplateFileTypeMain(String templateFileTypeMain) {
         this.templateFileTypeMain = templateFileTypeMain;
+    }
+
+    public String getOutputFileSuffix() {
+        return outputFileSuffix;
+    }
+
+    public void setOutputFileSuffix(String outputFileSuffix) {
+        this.outputFileSuffix = outputFileSuffix;
+    }
+
+    public String getIncludeVMpath() {
+        return includeVMpath;
+    }
+
+    public void setIncludeVMpath(String includeVMpath) {
+        this.includeVMpath = includeVMpath;
     }
 }

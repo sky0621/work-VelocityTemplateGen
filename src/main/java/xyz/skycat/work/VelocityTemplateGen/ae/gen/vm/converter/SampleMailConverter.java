@@ -45,23 +45,21 @@ public class SampleMailConverter {
             /*
              * メール文例の変動項目を置換変数に変えていく
              */
-            sampleMailList.stream().forEach(
-                    sampleMail -> {
-                        displaySpecificationList.stream().forEach(
-                                displaySpecification -> {
-                                    if (sampleMail.getNo() != displaySpecification.getNo()) {
-                                        // 変動項目を $ 変数置換
-                                        aggregateResult(sampleMail.getExample().replace(displaySpecification.getTargetStr(), displaySpecification.getConvertStr()));
+            for (SampleMail sampleMail : sampleMailList) {
+                String example = sampleMail.getExample();
+                for (DisplaySpecification displaySpecification : displaySpecificationList) {
+                    if (sampleMail.getNo() == displaySpecification.getNo()) {
+                        // 変動項目を $ 変数置換
+                        example = sampleMail.getExample().replace(displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
 
-                                        // インクルード変換用のケース
-                                        if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
-                                            aggregateResult(IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType));
-                                        }
-                                    }
-                                }
-                        );
+                        // インクルード変換用のケース
+                        if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
+                            example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType);
+                        }
                     }
-            );
+                }
+                aggregateResult(example);
+            }
         } catch (Exception e) {
             // TODO error handling.
             e.printStackTrace();

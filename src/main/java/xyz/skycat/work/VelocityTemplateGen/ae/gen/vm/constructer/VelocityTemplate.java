@@ -4,6 +4,7 @@ import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class VelocityTemplate {
     }
 
     public String getTemplateFileName() {
-        return configGenVm().getOutputDir() + templateFileName;
+        return configGenVm().getOutputDir() + File.separator + templateFileName + configGenVm().getOutputFileSuffix();
     }
 
     public void setTemplateFileName(String templateFileName) {

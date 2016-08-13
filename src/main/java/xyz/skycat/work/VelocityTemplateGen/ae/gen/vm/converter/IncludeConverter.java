@@ -1,7 +1,5 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter;
 
-import xyz.skycat.work.VelocityTemplateGen.Config;
-
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
 
 /**
@@ -19,7 +17,7 @@ public class IncludeConverter {
         }
 
         String setStr = "#set($parts = " + setStrPrefix + includeFileNameBase + "Bean)";
-        String parseStr = "#parse(\"" + Config.includeVMpath + includeFileNameBase + ".vm\")";
+        String parseStr = "#parse(\"" + configGenVm().getIncludeVMpath() + includeFileNameBase + configGenVm().getOutputFileSuffix() + "\")";
 
         return setStr + System.getProperty("line.separator") + parseStr;
     }

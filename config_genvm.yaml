@@ -28,3 +28,7 @@ includeConvertStr: "$INCLUDE$"
 prefixConvertString: "bean."
 # 　VMの種別が「本体」の場合の文字列
 templateFileTypeMain: "本体"
+# 　出力ファイルの拡張子
+outputFileSuffix: ".vm"
+# 　VMファイルのインクルード時のパス
+includeVMpath: "mail/template/parts/"
