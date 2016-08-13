@@ -1,5 +1,6 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
 
 import java.util.ArrayList;
@@ -16,8 +17,11 @@ public class VelocityTemplate {
 
     private List<SampleMail> sampleMailList;
 
+    private List<DisplaySpecification> displaySpecificationList;
+
     public VelocityTemplate() {
         sampleMailList = new ArrayList<>();
+        displaySpecificationList = new ArrayList<>();
     }
 
     public String getTemplateFileName() {
@@ -43,4 +47,13 @@ public class VelocityTemplate {
     public void setSampleMailList(List<SampleMail> sampleMailList) {
         this.sampleMailList = sampleMailList;
     }
+
+    public List<DisplaySpecification> getDisplaySpecificationList() {
+        return displaySpecificationList;
+    }
+
+    public void setDisplaySpecificationList(List<DisplaySpecification> displaySpecificationList) {
+        this.displaySpecificationList = displaySpecificationList;
+    }
+
 }

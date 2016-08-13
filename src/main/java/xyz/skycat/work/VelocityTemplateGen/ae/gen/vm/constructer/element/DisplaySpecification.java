@@ -1,9 +1,10 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
 
 import org.apache.poi.ss.usermodel.Cell;
-import xyz.skycat.work.VelocityTemplateGen.Config;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
+
+import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
 
 /**
  * Created by SS on 2016/08/12.
@@ -33,7 +34,14 @@ public class DisplaySpecification implements VelocityTemplateElement {
     @Override
     public void doProcess(VelocityTemplate velocityTemplate) {
 
-        // TODO ここから！
+        if (checkErrorTargetNoCell(noCell)) {
+            // TODO Logger使用
+            return;
+        }
+
+        if(displaySpecificationParseOn) {
+            velocityTemplate.getDisplaySpecificationList().add(this);
+        }
     }
 
     private boolean checkErrorTargetNoCell(Cell noCell) {
@@ -43,7 +51,7 @@ public class DisplaySpecification implements VelocityTemplateElement {
         try {
             Object cellValue = PoiUtil.getCellValue(noCell);
             if (cellValue instanceof String) {
-                if (Config.displaySpecificationMarkingString.equals((String) cellValue)) {
+                if (configGenVm().getMarkingString_displaySpecification().equals((String) cellValue)) {
                     displaySpecificationParseOn = true;
                 }
                 return true;
@@ -60,4 +68,11 @@ public class DisplaySpecification implements VelocityTemplateElement {
         }
     }
 
+    public static boolean isDisplaySpecificationParseOn() {
+        return displaySpecificationParseOn;
+    }
+
+    public static void setDisplaySpecificationParseOn(boolean displaySpecificationParseOn) {
+        DisplaySpecification.displaySpecificationParseOn = displaySpecificationParseOn;
+    }
 }

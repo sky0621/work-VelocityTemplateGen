@@ -2,6 +2,7 @@ package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element;
 
 import org.apache.poi.ss.usermodel.Row;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.row.DisplaySpecificationRowParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.row.SampleMailRowParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.row.TitleRowParser;
 
@@ -26,7 +27,7 @@ public class RowParser {
         }
 
         // 表示仕様の保持
-        if(!(new SampleMailRowParser().parse(row, velocityTemplate))) {
+        if(!(new DisplaySpecificationRowParser().parse(row, velocityTemplate))) {
             return false;
         }
 

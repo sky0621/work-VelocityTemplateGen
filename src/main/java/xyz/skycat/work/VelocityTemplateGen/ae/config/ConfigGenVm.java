@@ -30,10 +30,37 @@ public class ConfigGenVm {
     private int colIdx_templateFileType;    // J列
 
     // No列がある列Index
-    private int colIdx_sampleMailNo;
+    private int colIdx_sampleMail_no;
 
     // メール文例がある列Index
-    private int colIdx_sampleMailExample;
+    private int colIdx_sampleMail_example;
+
+    // 「項目番号」がある列Index
+    private int colIdx_displaySpecification_no;  // F列
+
+    // 「説明」がある列Index
+    private int colIdx_displaySpecification_explain;   // G列
+
+    // 「置換対象」がある列Index
+    private int colIdx_displaySpecification_targetStr; // H列
+
+    // 「置換変数」がある列Index
+    private int colIdx_displaySpecification_convertStr;    // I列
+
+    // 「型」がある列Index
+    private int colIdx_displaySpecification_convertType;   // J列
+
+    /*
+     * 解析行判定マーキング用
+     */
+    // 表示仕様の解析をはじめる上でのマーキングを行うための文字列
+    private String markingString_displaySpecification;
+
+    // システムカラムの解析をはじめる上でのマーキングを行うための文字列
+    private String markingString_systemColumn;
+
+    // スキップ対象のマーキング文字列
+    private String skipString_displaySpecification;
 
     // ----------------------------------------------------------------------------------------------------------------
     // ゲッター／セッター
@@ -89,19 +116,84 @@ public class ConfigGenVm {
         this.lineIdx_sampleMail = lineIdx_sampleMail;
     }
 
-    public int getColIdx_sampleMailNo() {
-        return colIdx_sampleMailNo;
+    public int getColIdx_sampleMail_no() {
+        return colIdx_sampleMail_no;
     }
 
-    public void setColIdx_sampleMailNo(int colIdx_sampleMailNo) {
-        this.colIdx_sampleMailNo = colIdx_sampleMailNo;
+    public void setColIdx_sampleMail_no(int colIdx_sampleMail_no) {
+        this.colIdx_sampleMail_no = colIdx_sampleMail_no;
     }
 
-    public int getColIdx_sampleMailExample() {
-        return colIdx_sampleMailExample;
+    public int getColIdx_sampleMail_example() {
+        return colIdx_sampleMail_example;
     }
 
-    public void setColIdx_sampleMailExample(int colIdx_sampleMailExample) {
-        this.colIdx_sampleMailExample = colIdx_sampleMailExample;
+    public void setColIdx_sampleMail_example(int colIdx_sampleMail_example) {
+        this.colIdx_sampleMail_example = colIdx_sampleMail_example;
     }
+
+    public int getColIdx_displaySpecification_no() {
+        return colIdx_displaySpecification_no;
+    }
+
+    public void setColIdx_displaySpecification_no(int colIdx_displaySpecification_no) {
+        this.colIdx_displaySpecification_no = colIdx_displaySpecification_no;
+    }
+
+    public int getColIdx_displaySpecification_explain() {
+        return colIdx_displaySpecification_explain;
+    }
+
+    public void setColIdx_displaySpecification_explain(int colIdx_displaySpecification_explain) {
+        this.colIdx_displaySpecification_explain = colIdx_displaySpecification_explain;
+    }
+
+    public int getColIdx_displaySpecification_targetStr() {
+        return colIdx_displaySpecification_targetStr;
+    }
+
+    public void setColIdx_displaySpecification_targetStr(int colIdx_displaySpecification_targetStr) {
+        this.colIdx_displaySpecification_targetStr = colIdx_displaySpecification_targetStr;
+    }
+
+    public int getColIdx_displaySpecification_convertStr() {
+        return colIdx_displaySpecification_convertStr;
+    }
+
+    public void setColIdx_displaySpecification_convertStr(int colIdx_displaySpecification_convertStr) {
+        this.colIdx_displaySpecification_convertStr = colIdx_displaySpecification_convertStr;
+    }
+
+    public int getColIdx_displaySpecification_convertType() {
+        return colIdx_displaySpecification_convertType;
+    }
+
+    public void setColIdx_displaySpecification_convertType(int colIdx_displaySpecification_convertType) {
+        this.colIdx_displaySpecification_convertType = colIdx_displaySpecification_convertType;
+    }
+
+    public String getMarkingString_displaySpecification() {
+        return markingString_displaySpecification;
+    }
+
+    public void setMarkingString_displaySpecification(String markingString_displaySpecification) {
+        this.markingString_displaySpecification = markingString_displaySpecification;
+    }
+
+    public String getMarkingString_systemColumn() {
+        return markingString_systemColumn;
+    }
+
+    public void setMarkingString_systemColumn(String markingString_systemColumn) {
+        this.markingString_systemColumn = markingString_systemColumn;
+    }
+
+    public String getSkipString_displaySpecification() {
+        return skipString_displaySpecification;
+    }
+
+    public void setSkipString_displaySpecification(String skipString_displaySpecification) {
+        this.skipString_displaySpecification = skipString_displaySpecification;
+    }
+
 }

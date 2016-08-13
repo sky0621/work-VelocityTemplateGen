@@ -9,5 +9,15 @@ lineIdx_sampleMail: 4
 colIdx_templateFileName: 8
 colIdx_templateFileType: 9
 # 　サンプルメール関連行
-colIdx_sampleMailNo: 0
-colIdx_sampleMailExample: 2
+colIdx_sampleMail_no: 0
+colIdx_sampleMail_example: 2
+# 　表示仕様関連行
+colIdx_displaySpecification_no: 5
+colIdx_displaySpecification_explain: 6
+colIdx_displaySpecification_targetStr: 7
+colIdx_displaySpecification_convertStr: 8
+colIdx_displaySpecification_convertType: 9
+# 解析行判定マーキング用
+markingString_displaySpecification: "表示仕様"
+markingString_systemColumn: "システム補足表示仕様"
+skipString_displaySpecification: "項目番号"

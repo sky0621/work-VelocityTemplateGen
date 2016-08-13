@@ -22,7 +22,7 @@ public class SampleMailRowParser {
         // TODO 例外スロー？
 
         CellParser cellParser = new CellParser(velocityTemplate);
-        cellParser.parse(new SampleMail(row.getCell(configGenVm().getColIdx_sampleMailNo()), row.getCell(configGenVm().getColIdx_sampleMailExample())));
+        cellParser.parse(new SampleMail(row.getCell(configGenVm().getColIdx_sampleMail_no()), row.getCell(configGenVm().getColIdx_sampleMail_example())));
 
         return true;
     }
