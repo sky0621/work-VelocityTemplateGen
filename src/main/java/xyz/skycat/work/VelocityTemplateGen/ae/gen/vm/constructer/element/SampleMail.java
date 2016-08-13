@@ -13,6 +13,10 @@ public class SampleMail implements VelocityTemplateElement {
 
     private Cell exampleCell;
 
+    private int no;
+
+    private String example;
+
     public SampleMail(Cell noCell, Cell exampleCell) {
         this.noCell = noCell;
         this.exampleCell = exampleCell;
@@ -29,6 +33,7 @@ public class SampleMail implements VelocityTemplateElement {
             // TODO Logger使用
         } else {
             velocityTemplate.getSampleMailList().add(this);
+            expand();
         }
 
     }
@@ -73,6 +78,19 @@ public class SampleMail implements VelocityTemplateElement {
             return true;
         }
         return false;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public void setExample(String example) {
+        this.example = example;
+    }
+
+    private void expand() {
+        setNo(PoiUtil.getRowNum(noCell));
+        setExample(exampleCell.getStringCellValue());
     }
 
 }

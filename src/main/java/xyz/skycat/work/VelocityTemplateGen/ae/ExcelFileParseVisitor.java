@@ -1,13 +1,16 @@
 package xyz.skycat.work.VelocityTemplateGen.ae;
 
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter.SampleMailConverter;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.ExcelParser;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.Parser;
+import xyz.skycat.work.VelocityTemplateGen.ae.util.FilesUtil;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,10 +31,33 @@ public class ExcelFileParseVisitor implements FileVisitor<Path> {
 
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 
-        Optional<List<Optional<VelocityTemplate>>> velocityTemplateOptional = parser.parse(file);
+        try {
+            Optional<List<Optional<VelocityTemplate>>> velocityTemplateListOptional = parser.parse(file);
+            List<Optional<VelocityTemplate>> velocityTemplateList = velocityTemplateListOptional.orElse(new ArrayList<>());
+            velocityTemplateList.stream().forEach(
+                    velocityTemplateOptional -> {
+                        // Oops...
+                        VelocityTemplate velocityTemplate = velocityTemplateOptional.get();
+                        if (velocityTemplate == null) {
+                            // TODO Nothing to do ?
+                        } else {
+                            SampleMailConverter sampleMailConverter = new SampleMailConverter(
+                                    velocityTemplate.getSampleMailList(),
+                                    velocityTemplate.getDisplaySpecificationList(),
+                                    velocityTemplate.getTemplateFileType()
+                            );
 
-        // FIXME パース結果の出力！
-
+                            if(sampleMailConverter.convert()) {
+                                // 出力
+                                FilesUtil.outputInit(velocityTemplate.getTemplateFileName());
+                                FilesUtil.output(velocityTemplate.getTemplateFileName(), sampleMailConverter.getResult());
+                            }
+                        }
+                    }
+            );
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
         return FileVisitResult.CONTINUE;
     }
 
@@ -43,23 +69,6 @@ public class ExcelFileParseVisitor implements FileVisitor<Path> {
 
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
         return FileVisitResult.CONTINUE;
-    }
-
-    private void outputInit(String vmFileNameFullPath) throws IOException {
-        Files.deleteIfExists(Paths.get(vmFileNameFullPath));
-        Files.createFile(Paths.get(vmFileNameFullPath));
-    }
-
-    private void output(String vmFileNameFullPath, String str) throws IOException {
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(vmFileNameFullPath), StandardOpenOption.APPEND)) {
-            writer.write(str);
-            writer.write("\n");
-            writer.flush();
-        } catch (IOException e) {
-            throw e;
-        }
-
     }
 
 }

@@ -1,10 +1,13 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
 
 /**
  * Created by SS on 2016/08/12.
@@ -25,7 +28,7 @@ public class VelocityTemplate {
     }
 
     public String getTemplateFileName() {
-        return templateFileName;
+        return configGenVm().getOutputDir() + templateFileName;
     }
 
     public void setTemplateFileName(String templateFileName) {

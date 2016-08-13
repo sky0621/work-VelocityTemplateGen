@@ -21,3 +21,10 @@ colIdx_displaySpecification_convertType: 9
 markingString_displaySpecification: "表示仕様"
 markingString_systemColumn: "システム補足表示仕様"
 skipString_displaySpecification: "項目番号"
+# その他
+# 　インクルードを表す置換変数の一部
+includeConvertStr: "$INCLUDE$"
+# 　置換変数に付加するプレフィックス
+prefixConvertString: "bean."
+# 　VMの種別が「本体」の場合の文字列
+templateFileTypeMain: "本体"

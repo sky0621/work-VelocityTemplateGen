@@ -62,6 +62,18 @@ public class ConfigGenVm {
     // スキップ対象のマーキング文字列
     private String skipString_displaySpecification;
 
+    /*
+     * その他
+     */
+    // インクルードを表す置換変数の一部
+    private String includeConvertStr;
+
+    // 置換変数に付加するプレフィックス
+    private String prefixConvertString;
+
+    // VMの種別が「本体」の場合の文字列
+    private String templateFileTypeMain;
+
     // ----------------------------------------------------------------------------------------------------------------
     // ゲッター／セッター
     // ----------------------------------------------------------------------------------------------------------------
@@ -196,4 +208,27 @@ public class ConfigGenVm {
         this.skipString_displaySpecification = skipString_displaySpecification;
     }
 
+    public String getIncludeConvertStr() {
+        return includeConvertStr;
+    }
+
+    public void setIncludeConvertStr(String includeConvertStr) {
+        this.includeConvertStr = includeConvertStr;
+    }
+
+    public String getPrefixConvertString() {
+        return prefixConvertString;
+    }
+
+    public void setPrefixConvertString(String prefixConvertString) {
+        this.prefixConvertString = prefixConvertString;
+    }
+
+    public String getTemplateFileTypeMain() {
+        return templateFileTypeMain;
+    }
+
+    public void setTemplateFileTypeMain(String templateFileTypeMain) {
+        this.templateFileTypeMain = templateFileTypeMain;
+    }
 }

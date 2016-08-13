@@ -23,6 +23,16 @@ public class DisplaySpecification implements VelocityTemplateElement {
 
     private Cell convertTypeCell;
 
+    private int no;
+
+    private String explain;
+
+    private String targetStr;
+
+    private String convertStr;
+
+    private String convertType;
+
     public DisplaySpecification(Cell noCell, Cell explainCell, Cell targetStrCell, Cell convertStrCell, Cell convertTypeCell) {
         this.noCell = noCell;
         this.explainCell = explainCell;
@@ -41,6 +51,7 @@ public class DisplaySpecification implements VelocityTemplateElement {
 
         if(displaySpecificationParseOn) {
             velocityTemplate.getDisplaySpecificationList().add(this);
+            expand();
         }
     }
 
@@ -75,4 +86,53 @@ public class DisplaySpecification implements VelocityTemplateElement {
     public static void setDisplaySpecificationParseOn(boolean displaySpecificationParseOn) {
         DisplaySpecification.displaySpecificationParseOn = displaySpecificationParseOn;
     }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
+    }
+
+    public String getTargetStr() {
+        return targetStr;
+    }
+
+    public void setTargetStr(String targetStr) {
+        this.targetStr = targetStr;
+    }
+
+    public String getConvertStr() {
+        return convertStr;
+    }
+
+    public void setConvertStr(String convertStr) {
+        this.convertStr = convertStr;
+    }
+
+    public String getConvertType() {
+        return convertType;
+    }
+
+    public void setConvertType(String convertType) {
+        this.convertType = convertType;
+    }
+
+    private void expand() {
+        setNo(PoiUtil.getRowNum(noCell));
+        setExplain(explainCell.getStringCellValue());
+        setTargetStr(targetStrCell.getStringCellValue());
+        setConvertStr(convertStrCell.getStringCellValue());
+        setConvertType(convertTypeCell.getStringCellValue());
+    }
+
 }
