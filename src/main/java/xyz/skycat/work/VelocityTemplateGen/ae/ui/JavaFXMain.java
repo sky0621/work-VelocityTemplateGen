@@ -22,7 +22,7 @@ public class JavaFXMain extends Application {
 
     TextField inputDirTField;
     TextField outputDirTField;
-    Label errorLabel;
+    Label resultLabel;
 
     public static void main(String[] args) {
         launch(args);
@@ -58,13 +58,14 @@ public class JavaFXMain extends Application {
                 configGenVm.setInputDir(inputDirTField.getText());
                 configGenVm.setOutputDir(outputDirTField.getText());
                 new Executor().run(GEN_VM);
+                resultLabel.setText("生成終了！");   // TODO 即レス？
             } catch (Throwable t) {
                 t.printStackTrace();
-                errorLabel.setText(t.getMessage());
+                resultLabel.setText(t.getMessage());
             }
         });
 
-        errorLabel = new Label();
+        resultLabel = new Label();
 
         // Pane
         VBox pane = new VBox(10d);
@@ -75,7 +76,7 @@ public class JavaFXMain extends Application {
         pane.getChildren().add(outputDirExplain);
         pane.getChildren().add(outputDirTField);
         pane.getChildren().add(parseBtn);
-        pane.getChildren().add(errorLabel);
+        pane.getChildren().add(resultLabel);
 
         // Scene
         Scene scene = new Scene(pane);

@@ -13,7 +13,9 @@ public class FilesUtil {
 
     public static boolean outputInit(String vmFileNameFullPath) {
         try {
-            Files.deleteIfExists(Paths.get(vmFileNameFullPath));
+            if (Files.exists(Paths.get(vmFileNameFullPath))) {
+                Files.deleteIfExists(Paths.get(vmFileNameFullPath));
+            }
             Files.createFile(Paths.get(vmFileNameFullPath));
         } catch (IOException e) {
             // TODO error handling.
