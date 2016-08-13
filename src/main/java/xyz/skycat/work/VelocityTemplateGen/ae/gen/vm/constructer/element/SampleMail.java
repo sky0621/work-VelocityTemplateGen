@@ -43,7 +43,7 @@ public class SampleMail implements VelocityTemplateElement {
     }
 
     public String getExample() {
-        return exampleCell.getStringCellValue();
+        return exampleCell == null ? "" : exampleCell.getStringCellValue();
     }
 
     private boolean checkErrorNoCell(Cell noCell) {
@@ -66,7 +66,7 @@ public class SampleMail implements VelocityTemplateElement {
 
     private boolean checkErrorExampleCell(Cell exampleCell) {
         if (exampleCell == null) {
-            return true;
+            return false;
         }
         try {
             Object cellValue = PoiUtil.getCellValue(exampleCell);
@@ -90,7 +90,7 @@ public class SampleMail implements VelocityTemplateElement {
 
     private void expand() {
         setNo(PoiUtil.getRowNum(noCell));
-        setExample(exampleCell.getStringCellValue());
+        setExample(exampleCell == null ? "" : exampleCell.getStringCellValue());
     }
 
 }

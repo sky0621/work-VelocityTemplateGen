@@ -1,30 +1,33 @@
-userName様
+$!{userName}様
+
 お客様のチケットの購入内容は以下の通りです。
 必ず購入内容をマイページの「購入履歴」にてご確認ください。
 【ご購入内容】
-■チケット引換番号:ticketNumber
+■チケット引換番号:$!{ticketNumber}
 ■公演情報
-公演名:eventName
-公演日:eventDate
-開演時刻:eventTime
-会場名:eventPlace
+公演名:$!{eventName}
+公演日:$!{eventDate}
+開演時刻:$!{eventTime}
+会場名:$!{eventPlace}
 ■購入チケット情報
-全席指定  ticketCount枚  
-1階 13列 26番fromToConnectStr28番
+全席指定  $!{ticketCount}枚  
+1階 13列 26番$!{fromToConnectStr}28番
 ■料金明細
-チケット料金:全席指定 ticketCount枚 計9,ticketCount60円
-システム利用料:216円 × ticketCount枚 計 648円
-配送手数料:shippingCharges円
-合計金額:計 totalAmount円
+チケット料金:全席指定 $!{ticketCount}枚 計9,$!{ticketCount}60円
+システム利用料:216円 × $!{ticketCount}枚 計 648円
+配送手数料:$!{shippingCharges}円
+合計金額:計 $!{totalAmount}円
+
 ■決済方法
-paymentMethod
-登録名:paymentType
+$!{paymentMethod}
+登録名:$!{paymentType}
 ■引取方法
-takeOffMethod
+$!{takeOffMethod}
 お届け先:基本情報
 ◆決済について
 ご登録の決済方法にてお支払い手続きは完了しています。
 ご購入後のチケットの変更・キャンセルはできません。
+
 ◆チケットの発送について
 チケットはゆうメール(簡易書留扱い)にてお届けいたします。
 配達時にご不在の場合、不在通知票が投函されますのでご確認ください。
@@ -37,6 +40,7 @@ takeOffMethod
 公演日の1週間前になってもチケットがお手元に届かない場合は、 チケットぴあメールセンターまでお問い合わせください。
 チケットぴあメールセンター (営業時間 10:00-18:00)
 電話:0570-02-9596
+
 ☆★せっかくチケットを買ったのに…… 
 急用でコンサートやお芝居に行けなくなってしまった経験ありませんか?
 ------
@@ -44,10 +48,13 @@ takeOffMethod
 「定価リセールサービス」 詳細はこちら→  http://w.pia.jp/a/resale/
 ※定価リセールサービスはPCとスマートフォンのみのサービスとなります。
 ※リセール申込対象外の公演もございます。
+
 ------
 万が一、病気などで行けなくなった時に備えて購入後すぐチケットにかける保険。チケットガードに入っていれば、もう安心!
 お申し込みはカンタン。マイページの購入履歴画面よりどうぞ
+
 ------
+
 #set($parts = $bean.$INCLUDE$footerBean)
 #parse("mail/template/parts/$INCLUDE$footer.vm")
 
