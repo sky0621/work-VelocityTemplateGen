@@ -9,7 +9,7 @@ public class IncludeConverter {
 
     public static String createIncludeString(String convertStr, String templateFileType) {
 
-        String includeFileNameBase = convertStr.replace(configGenVm().getPrefixConvertString(), "");
+        String includeFileNameBase = convertStr.replace(configGenVm().getIncludeConvertStr(), "");
 
         String setStrPrefix = "$parts.";
         if (configGenVm().getTemplateFileTypeMain().equals(templateFileType)) {

@@ -50,7 +50,7 @@ public class SampleMailConverter {
                 for (DisplaySpecification displaySpecification : displaySpecificationList) {
                     if (sampleMail.getNo() == displaySpecification.getNo()) {
                         // 変動項目を $ 変数置換
-                        example = replaceByConvertStr(sampleMail.getExample(), displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
+                        example = replaceByConvertStr(example, displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
 
                         // インクルード変換用のケース
                         if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {

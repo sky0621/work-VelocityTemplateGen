@@ -11,10 +11,10 @@ $!{userName}様
 会場名:$!{eventPlace}
 ■購入チケット情報
 全席指定  $!{ticketCount}枚  
-1階 13列 26番$!{fromToConnectStr}28番
+$!{floorNo}階 $!{columnsNo}列 $!{seatNoFrom}番$!{fromToConnectStr}$!{seatNoTo}番
 ■料金明細
-チケット料金:全席指定 $!{ticketCount}枚 計9,$!{ticketCount}60円
-システム利用料:216円 × $!{ticketCount}枚 計 648円
+チケット料金:全席指定 $!{ticketCount}枚 計$!{ticketTotalAmount}円
+システム利用料:$!{systemUseAmount}円 × $!{ticketCount}枚 計 $!{systemUseTotalAmount}円
 配送手数料:$!{shippingCharges}円
 合計金額:計 $!{totalAmount}円
 
@@ -55,6 +55,6 @@ $!{takeOffMethod}
 
 ------
 
-#set($parts = $bean.$INCLUDE$footerBean)
-#parse("mail/template/parts/$INCLUDE$footer.vm")
+#set($parts = $bean.footerBean)
+#parse("mail/template/parts/footer.vm")
 
