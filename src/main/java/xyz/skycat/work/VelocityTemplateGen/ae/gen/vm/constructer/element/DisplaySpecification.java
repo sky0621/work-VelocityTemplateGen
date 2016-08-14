@@ -9,7 +9,7 @@ import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.config
 /**
  * Created by SS on 2016/08/12.
  */
-public class DisplaySpecification implements VelocityTemplateElement {
+public class DisplaySpecification implements IfVelocityTemplateElement {
 
     private static boolean displaySpecificationParseOn = false;
 

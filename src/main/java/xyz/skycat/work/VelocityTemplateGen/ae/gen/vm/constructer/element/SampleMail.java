@@ -7,7 +7,7 @@ import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
 /**
  * Created by SS on 2016/08/12.
  */
-public class SampleMail implements VelocityTemplateElement {
+public class SampleMail implements IfVelocityTemplateElement {
 
     private Cell noCell;
 

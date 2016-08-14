@@ -9,7 +9,7 @@ import java.nio.file.Path;
 /**
  * Created by SS on 2016/08/12.
  */
-public interface Parser {
+public interface IfParser {
 
     VelocityTemplate parse(Path excelFilePath) throws IOException, InvalidFormatException;
 

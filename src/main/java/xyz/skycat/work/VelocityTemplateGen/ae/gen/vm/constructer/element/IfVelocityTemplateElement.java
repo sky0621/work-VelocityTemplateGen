@@ -5,7 +5,7 @@ import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplat
 /**
  * Created by SS on 2016/08/12.
  */
-public interface VelocityTemplateElement {
+public interface IfVelocityTemplateElement {
 
     void doProcess(VelocityTemplate velocityTemplate);
 
