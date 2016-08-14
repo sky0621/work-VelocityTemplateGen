@@ -41,11 +41,7 @@ public class ExcelFileParseVisitor implements FileVisitor<Path> {
                         if (velocityTemplate == null) {
                             // TODO Nothing to do ?
                         } else {
-                            SampleMailConverter sampleMailConverter = new SampleMailConverter(
-                                    velocityTemplate.getSampleMailList(),
-                                    velocityTemplate.getDisplaySpecificationList(),
-                                    velocityTemplate.getTemplateFileType()
-                            );
+                            SampleMailConverter sampleMailConverter = new SampleMailConverter(velocityTemplate);
 
                             if(sampleMailConverter.convert()) {
                                 // 出力

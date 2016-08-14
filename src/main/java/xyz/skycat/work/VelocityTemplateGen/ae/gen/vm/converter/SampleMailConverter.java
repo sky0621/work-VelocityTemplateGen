@@ -1,7 +1,10 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpression;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +23,17 @@ public class SampleMailConverter {
 
     private List<DisplaySpecification> displaySpecificationList;
 
+    private List<SeparateOutSpecification> separateOutSpecificationList;
+
     private String templateFileType;
 
     private List<String> convertResultList;
 
-    public SampleMailConverter(List<SampleMail> sampleMailList, List<DisplaySpecification> displaySpecificationList, String templateFileType) {
-        this.sampleMailList = sampleMailList;
-        this.displaySpecificationList = displaySpecificationList;
-        this.templateFileType = templateFileType;
+    public SampleMailConverter(VelocityTemplate velocityTemplate) {
+        sampleMailList = velocityTemplate.getSampleMailList();
+        displaySpecificationList = velocityTemplate.getDisplaySpecificationList();
+        templateFileType = velocityTemplate.getTemplateFileType();
+        separateOutSpecificationList = velocityTemplate.getSeparateOutSpecificationList();
         convertResultList = new ArrayList<>();
     }
 
@@ -48,11 +54,11 @@ public class SampleMailConverter {
             // 置換対象値長の降順優先でマッチングしないと誤変換するため（f.e. [13] , [9130] => [$!{no}] , [9$!{no}0]）
             displaySpecificationList.sort(comparing(x -> x.getTargetStr().length(), reverseOrder()));
 
-            /*
-             * メール文例の変動項目を置換変数に変えていく
-             */
             for (SampleMail sampleMail : sampleMailList) {
                 String example = sampleMail.getExample();
+                /*
+                 * メール文例の変動項目を置換変数に変えていく
+                 */
                 for (DisplaySpecification displaySpecification : displaySpecificationList) {
                     if (isNotTarget(sampleMail.getNo(), displaySpecification.getNo(), displaySpecification.getNos())) {
                         continue;
@@ -75,23 +81,29 @@ public class SampleMailConverter {
                         }
                     }
                 }
+
+                /*
+                 * 出し分け仕様を反映していく
+                 */
+                for (SeparateOutSpecification separateOutSpecification : separateOutSpecificationList) {
+                    if (isNotTarget(sampleMail.getNo(), separateOutSpecification.getNo(), separateOutSpecification.getNos())) {
+                        continue;
+                    }
+
+                    String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget());
+                    String systemExpression = separateOutSpecification.getSystemExpression();
+                    if (example.contains(systemConvertStrTarget)) {
+                        if (separateOutSpecification.isNewLineExists()) {
+                            example = example.replace(systemConvertStrTarget, systemExpression);
+                        } else {
+                            example = example.replace(systemConvertStrTarget, systemExpression);
+                        }
+                    }
+                }
                 if (!"<<<追加しない>>>".equals(example)) {
                     aggregateResult(example);
                 }
             }
-
-            /*
-             * 出し分け仕様を反映していく
-             */
-            List<String> tempList = new ArrayList<>();
-            for (String s : convertResultList) {
-
-            }
-            if (tempList.size() > 0) {
-                convertResultList = null;
-                convertResultList = tempList;
-            }
-
         } catch (Exception e) {
             // TODO error handling.
             e.printStackTrace();
@@ -101,14 +113,14 @@ public class SampleMailConverter {
         return true;
     }
 
-    private boolean isNotTarget(int sampleMailNo, int displaySpecificationNo, int[] displaySpecificationNos) {
-        if (sampleMailNo == displaySpecificationNo) {
+    private boolean isNotTarget(int sampleMailNo, int specificationNo, int[] specificationNos) {
+        if (sampleMailNo == specificationNo) {
             return false;
         }
-        if (displaySpecificationNos == null) {
+        if (specificationNos == null) {
             return true;
         }
-        for (int no : displaySpecificationNos) {
+        for (int no : specificationNos) {
             if (sampleMailNo == no) {
                 return false;
             }
@@ -130,6 +142,14 @@ public class SampleMailConverter {
 
     public void setDisplaySpecificationList(List<DisplaySpecification> displaySpecificationList) {
         this.displaySpecificationList = displaySpecificationList;
+    }
+
+    public List<SeparateOutSpecification> getSeparateOutSpecificationList() {
+        return separateOutSpecificationList;
+    }
+
+    public void setSeparateOutSpecificationList(List<SeparateOutSpecification> separateOutSpecificationList) {
+        this.separateOutSpecificationList = separateOutSpecificationList;
     }
 
     private String replaceByConvertStr(String example, String convertFrom, String convertTo) {

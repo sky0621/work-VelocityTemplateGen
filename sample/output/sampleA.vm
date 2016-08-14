@@ -11,7 +11,7 @@ $!{userName}様
 会場名:$!{eventPlace}
 ■購入チケット情報
 全席指定  $!{ticketCount}枚  
-$!{floorNo}階 $!{columnsNo}列 $!{seatNoFrom}番$!{fromToConnectStr}$!{seatNoTo}番
+$!{floorNo}階 $!{columnsNo}列 $!{seatNoFrom}番#if(${bean.seatNoTo}) - #end$!{seatNoTo}番
 ■料金明細
 チケット料金:全席指定 $!{ticketCount}枚 計$!{ticketTotalAmount}円
 システム利用料:$!{systemUseAmount}円 × $!{ticketCount}枚 計 $!{systemUseTotalAmount}円
@@ -50,7 +50,18 @@ $!{takeOffMethod}
 ※リセール申込対象外の公演もございます。
 
 ------
+#if(${bean.plugTextNotice})
 $!{plugTextNotice}
+#end
+#if(${bean.plugTextNotice})
+$!{plugTextNotice}
+#end
+#if(${bean.plugTextNotice})
+$!{plugTextNotice}
+#end
+#if(${bean.plugTextNotice})
+$!{plugTextNotice}
+#end
 ------
 
 #set($parts = $bean.footerBean)
