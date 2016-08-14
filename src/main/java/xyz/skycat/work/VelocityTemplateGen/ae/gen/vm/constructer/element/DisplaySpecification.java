@@ -2,7 +2,6 @@ package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
 
 import org.apache.poi.ss.usermodel.Cell;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
 
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
@@ -149,7 +148,12 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
     private void expand() {
         if (noCell != null) {
             setNo(PoiUtil.getRowNum(noCell));
-            setNos(PoiUtil.getRowNums(noCell, EACH_VALUE_SEPS));
+            if (getNo() == 0) {
+                setNos(PoiUtil.getRowNums(noCell, EACH_VALUE_SEPS));
+                if (getNos() == null) {
+                    setNos(PoiUtil.getRowNums(noCell, RANGE_VALUE_SEPS));
+                }
+            }
         }
         if (explainCell != null) {
             setExplain(explainCell.getStringCellValue());

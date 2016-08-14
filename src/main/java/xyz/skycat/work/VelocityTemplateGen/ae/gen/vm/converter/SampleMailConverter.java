@@ -3,11 +3,13 @@ package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
+import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpression.exp;
 
 /**
  * Created by SS on 2016/08/14.
@@ -20,20 +22,24 @@ public class SampleMailConverter {
 
     private String templateFileType;
 
-    private StringBuilder sb;
+    private List<String> convertResultList;
 
     public SampleMailConverter(List<SampleMail> sampleMailList, List<DisplaySpecification> displaySpecificationList, String templateFileType) {
         this.sampleMailList = sampleMailList;
         this.displaySpecificationList = displaySpecificationList;
         this.templateFileType = templateFileType;
-        sb = new StringBuilder();
+        convertResultList = new ArrayList<>();
     }
 
     private void aggregateResult(String src) {
-        sb.append(src).append(System.getProperty("line.separator"));
+        convertResultList.add(src);
     }
 
     public String getResult() {
+        StringBuilder sb = new StringBuilder();
+        for (String convertResult : convertResultList) {
+            sb.append(convertResult).append(System.getProperty("line.separator"));
+        }
         return sb.toString();
     }
 
@@ -59,8 +65,19 @@ public class SampleMailConverter {
                     if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
                         example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType);
                     }
+
+                    // 差し込み変換用のケース
+                    if (displaySpecification.getConvertStr().startsWith(configGenVm().getPlubTextStr())) {
+                        example = PlugTextConverter.createPlugTextString(example, displaySpecification.getConvertStr());
+                        if (convertResultList.contains(example)) {
+                            example = "<<<追加しない>>>";
+                            continue;
+                        }
+                    }
                 }
-                aggregateResult(example);
+                if(!"<<<追加しない>>>".equals(example)) {
+                    aggregateResult(example);
+                }
             }
         } catch (Exception e) {
             // TODO error handling.
@@ -103,7 +120,7 @@ public class SampleMailConverter {
     }
 
     private String replaceByConvertStr(String example, String convertFrom, String convertTo) {
-        return example.replace(convertFrom, "$!{" + convertTo + "}");
+        return example.replace(convertFrom, exp(convertTo));
     }
 
 }

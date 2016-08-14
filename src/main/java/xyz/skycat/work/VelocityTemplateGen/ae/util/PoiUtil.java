@@ -3,6 +3,11 @@ package xyz.skycat.work.VelocityTemplateGen.ae.util;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression.RANGE_VALUE_SEPS;
+
 /**
  * Created by SS on 2016/08/13.
  */
@@ -56,6 +61,23 @@ public class PoiUtil {
             try {
                 for (int i = 0; i < nums.length; i++) {
                     retNums[i] = Integer.parseInt(nums[i]);
+                }
+                // Oops...
+                if (RANGE_VALUE_SEPS.equals(splitter)) {
+                    List<Integer> retNumsList = new ArrayList<>();
+                    int from = retNums[0];
+                    int to = retNums[1];
+                    while (from <= to) {
+                        retNumsList.add(from);
+                        from++;
+                    }
+                    if (retNumsList.size() > 0) {
+                        int[] retNums2 = new int[retNumsList.size()];
+                        for (int j = 0; j < retNumsList.size(); j++) {
+                            retNums2[j] = retNumsList.get(j);
+                        }
+                        return retNums2;
+                    }
                 }
             } catch (NumberFormatException e) {
                 // バッドノウハウ・・・
