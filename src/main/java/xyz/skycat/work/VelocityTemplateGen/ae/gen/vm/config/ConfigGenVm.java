@@ -50,6 +50,18 @@ public class ConfigGenVm {
     // 「型」がある列Index
     private int colIdx_displaySpecification_convertType;   // J列
 
+    private int colIdx_separateOutSpecification_no;
+
+    private int colIdx_separateOutSpecification_explain;
+
+    private int colIdx_separateOutSpecification_condition;
+
+    private int colIdx_separateOutSpecification_systemConvertStrTarget;
+
+    private int colIdx_separateOutSpecification_systemExpression;
+
+    private int colIdx_separateOutSpecification_newLineExists;
+
     private String outputFileSuffix;
 
     /*
@@ -58,8 +70,8 @@ public class ConfigGenVm {
     // 表示仕様の解析をはじめる上でのマーキングを行うための文字列
     private String markingString_displaySpecification;
 
-    // システムカラムの解析をはじめる上でのマーキングを行うための文字列
-    private String markingString_systemColumn;
+    // 出し分け仕様の解析をはじめる上でのマーキングを行うための文字列
+    private String markingString_separateOutSpecification;
 
     /*
      * その他
@@ -194,12 +206,12 @@ public class ConfigGenVm {
         this.markingString_displaySpecification = markingString_displaySpecification;
     }
 
-    public String getMarkingString_systemColumn() {
-        return markingString_systemColumn;
+    public String getMarkingString_separateOutSpecification() {
+        return markingString_separateOutSpecification;
     }
 
-    public void setMarkingString_systemColumn(String markingString_systemColumn) {
-        this.markingString_systemColumn = markingString_systemColumn;
+    public void setMarkingString_separateOutSpecification(String markingString_separateOutSpecification) {
+        this.markingString_separateOutSpecification = markingString_separateOutSpecification;
     }
 
     public String getIncludeConvertStr() {
@@ -216,6 +228,54 @@ public class ConfigGenVm {
 
     public void setTemplateFileTypeMain(String templateFileTypeMain) {
         this.templateFileTypeMain = templateFileTypeMain;
+    }
+
+    public int getColIdx_separateOutSpecification_no() {
+        return colIdx_separateOutSpecification_no;
+    }
+
+    public void setColIdx_separateOutSpecification_no(int colIdx_separateOutSpecification_no) {
+        this.colIdx_separateOutSpecification_no = colIdx_separateOutSpecification_no;
+    }
+
+    public int getColIdx_separateOutSpecification_explain() {
+        return colIdx_separateOutSpecification_explain;
+    }
+
+    public void setColIdx_separateOutSpecification_explain(int colIdx_separateOutSpecification_explain) {
+        this.colIdx_separateOutSpecification_explain = colIdx_separateOutSpecification_explain;
+    }
+
+    public int getColIdx_separateOutSpecification_condition() {
+        return colIdx_separateOutSpecification_condition;
+    }
+
+    public void setColIdx_separateOutSpecification_condition(int colIdx_separateOutSpecification_condition) {
+        this.colIdx_separateOutSpecification_condition = colIdx_separateOutSpecification_condition;
+    }
+
+    public int getColIdx_separateOutSpecification_systemConvertStrTarget() {
+        return colIdx_separateOutSpecification_systemConvertStrTarget;
+    }
+
+    public void setColIdx_separateOutSpecification_systemConvertStrTarget(int colIdx_separateOutSpecification_systemConvertStrTarget) {
+        this.colIdx_separateOutSpecification_systemConvertStrTarget = colIdx_separateOutSpecification_systemConvertStrTarget;
+    }
+
+    public int getColIdx_separateOutSpecification_systemExpression() {
+        return colIdx_separateOutSpecification_systemExpression;
+    }
+
+    public void setColIdx_separateOutSpecification_systemExpression(int colIdx_separateOutSpecification_systemExpression) {
+        this.colIdx_separateOutSpecification_systemExpression = colIdx_separateOutSpecification_systemExpression;
+    }
+
+    public int getColIdx_separateOutSpecification_newLineExists() {
+        return colIdx_separateOutSpecification_newLineExists;
+    }
+
+    public void setColIdx_separateOutSpecification_newLineExists(int colIdx_separateOutSpecification_newLineExists) {
+        this.colIdx_separateOutSpecification_newLineExists = colIdx_separateOutSpecification_newLineExists;
     }
 
     public String getOutputFileSuffix() {

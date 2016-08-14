@@ -69,6 +69,9 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
                 if (configGenVm().getMarkingString_displaySpecification().equals((String) cellValue)) {
                     displaySpecificationParseOn = true;
                 }
+                if (configGenVm().getMarkingString_separateOutSpecification().equals((String)cellValue)) {
+                    displaySpecificationParseOn = false;
+                }
                 if (!PoiUtil.splitCheck(cellValue, EACH_VALUE_SEPS)) {
                     return false;
                 }

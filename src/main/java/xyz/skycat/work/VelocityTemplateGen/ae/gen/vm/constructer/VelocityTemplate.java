@@ -3,6 +3,7 @@ package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer;
 import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,13 +20,19 @@ public class VelocityTemplate {
 
     private String templateFileType;
 
+    // メール文例
     private List<SampleMail> sampleMailList;
 
+    // 表示仕様
     private List<DisplaySpecification> displaySpecificationList;
+
+    // 出し分け仕様
+    private List<SeparateOutSpecification> separateOutSpecificationList;
 
     public VelocityTemplate() {
         sampleMailList = new ArrayList<>();
         displaySpecificationList = new ArrayList<>();
+        separateOutSpecificationList = new ArrayList<>();
     }
 
     public String getTemplateFileName() {
@@ -60,4 +67,11 @@ public class VelocityTemplate {
         this.displaySpecificationList = displaySpecificationList;
     }
 
+    public List<SeparateOutSpecification> getSeparateOutSpecificationList() {
+        return separateOutSpecificationList;
+    }
+
+    public void setSeparateOutSpecificationList(List<SeparateOutSpecification> separateOutSpecificationList) {
+        this.separateOutSpecificationList = separateOutSpecificationList;
+    }
 }

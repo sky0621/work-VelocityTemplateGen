@@ -17,9 +17,16 @@ colIdx_displaySpecification_explain: 6
 colIdx_displaySpecification_targetStr: 7
 colIdx_displaySpecification_convertStr: 8
 colIdx_displaySpecification_convertType: 9
+# 　出し分け仕様関連行
+colIdx_separateOutSpecification_no: 5
+colIdx_separateOutSpecification_explain: 6
+colIdx_separateOutSpecification_condition: 7
+colIdx_separateOutSpecification_systemConvertStrTarget: 8
+colIdx_separateOutSpecification_systemExpression: 9
+colIdx_separateOutSpecification_newLineExists: 10
 # 解析行判定マーキング用
 markingString_displaySpecification: "表示仕様"
-markingString_systemColumn: "システム補足表示仕様"
+markingString_separateOutSpecification: "出し分け仕様"
 # その他
 # 　インクルードを表す置換変数の一部
 includeConvertStr: "$INCLUDE$"

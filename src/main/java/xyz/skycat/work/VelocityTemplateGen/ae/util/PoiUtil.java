@@ -32,6 +32,14 @@ public class PoiUtil {
         }
     }
 
+    public static boolean getBooleanValue(Cell cell) {
+        Object cellValue = getCellValue(cell);
+        if (cellValue instanceof Boolean) {
+            return cell.getBooleanCellValue();
+        }
+        return false;
+    }
+
     public static int getRowNum(Cell noCell) {
         Object cellValue = getCellValue(noCell);
         if (cellValue instanceof Double) {

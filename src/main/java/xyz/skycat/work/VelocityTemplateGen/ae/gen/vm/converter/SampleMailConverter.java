@@ -75,10 +75,23 @@ public class SampleMailConverter {
                         }
                     }
                 }
-                if(!"<<<追加しない>>>".equals(example)) {
+                if (!"<<<追加しない>>>".equals(example)) {
                     aggregateResult(example);
                 }
             }
+
+            /*
+             * 出し分け仕様を反映していく
+             */
+            List<String> tempList = new ArrayList<>();
+            for (String s : convertResultList) {
+
+            }
+            if (tempList.size() > 0) {
+                convertResultList = null;
+                convertResultList = tempList;
+            }
+
         } catch (Exception e) {
             // TODO error handling.
             e.printStackTrace();
