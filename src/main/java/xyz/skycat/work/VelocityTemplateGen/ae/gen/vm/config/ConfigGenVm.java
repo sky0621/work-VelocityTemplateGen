@@ -61,24 +61,21 @@ public class ConfigGenVm {
     // システムカラムの解析をはじめる上でのマーキングを行うための文字列
     private String markingString_systemColumn;
 
-    // スキップ対象のマーキング文字列
-    private String skipString_displaySpecification;
-
     /*
      * その他
      */
     // インクルードを表す置換変数の一部
     private String includeConvertStr;
 
-    // 置換変数に付加するプレフィックス
-    private String prefixConvertString;
-
     // VMの種別が「本体」の場合の文字列
     private String templateFileTypeMain;
 
     // VMファイルのインクルード時のパス
     private String includeVMpath;
-//
+
+    // 差し込みファイルを表す置換変数の一部
+    private String plubTextStr;
+
     // ----------------------------------------------------------------------------------------------------------------
     // ゲッター／セッター
     // ----------------------------------------------------------------------------------------------------------------
@@ -205,28 +202,12 @@ public class ConfigGenVm {
         this.markingString_systemColumn = markingString_systemColumn;
     }
 
-    public String getSkipString_displaySpecification() {
-        return skipString_displaySpecification;
-    }
-
-    public void setSkipString_displaySpecification(String skipString_displaySpecification) {
-        this.skipString_displaySpecification = skipString_displaySpecification;
-    }
-
     public String getIncludeConvertStr() {
         return includeConvertStr;
     }
 
     public void setIncludeConvertStr(String includeConvertStr) {
         this.includeConvertStr = includeConvertStr;
-    }
-
-    public String getPrefixConvertString() {
-        return prefixConvertString;
-    }
-
-    public void setPrefixConvertString(String prefixConvertString) {
-        this.prefixConvertString = prefixConvertString;
     }
 
     public String getTemplateFileTypeMain() {
@@ -251,5 +232,13 @@ public class ConfigGenVm {
 
     public void setIncludeVMpath(String includeVMpath) {
         this.includeVMpath = includeVMpath;
+    }
+
+    public String getPlubTextStr() {
+        return plubTextStr;
+    }
+
+    public void setPlubTextStr(String plubTextStr) {
+        this.plubTextStr = plubTextStr;
     }
 }

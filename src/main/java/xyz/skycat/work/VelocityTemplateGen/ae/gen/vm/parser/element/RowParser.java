@@ -29,11 +29,6 @@ public class RowParser implements IfRowParser {
             return false;
         }
 
-        // システム補足表示仕様
-        if (!new SystemDisplaySpecificationRowParser().parse(row, velocityTemplate)) {
-            return false;
-        }
-
         // 出し分け制御仕様
         if (!new SeparateOutSpecificationRowParser().parse(row, velocityTemplate)) {
             return false;

@@ -28,7 +28,42 @@ public class PoiUtil {
     }
 
     public static int getRowNum(Cell noCell) {
-        return ((Double) getCellValue(noCell)).intValue();
+        Object cellValue = getCellValue(noCell);
+        if (cellValue instanceof Double) {
+            return ((Double) cellValue).intValue();
+        }
+        return 0;
+    }
+
+    public static int[] getRowNums(Cell noCell, String splitter) {
+        return split(getCellValue(noCell), splitter);
+    }
+
+    public static boolean splitCheck(Object cellValue, String splitter) {
+        if (split(cellValue, splitter) == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public static int[] split(Object cellValue, String splitter) {
+        if (cellValue == null) return null;
+        if (!(cellValue instanceof String)) return null;
+        int[] retNums = null;
+        if (((String) cellValue).contains(splitter)) {
+            String[] nums = ((String) cellValue).split(splitter);
+            retNums = new int[nums.length];
+            try {
+                for (int i = 0; i < nums.length; i++) {
+                    retNums[i] = Integer.parseInt(nums[i]);
+                }
+            } catch (NumberFormatException e) {
+                // バッドノウハウ・・・
+                // TODO Logger使用
+                return null;
+            }
+        }
+        return retNums;
     }
 
 }

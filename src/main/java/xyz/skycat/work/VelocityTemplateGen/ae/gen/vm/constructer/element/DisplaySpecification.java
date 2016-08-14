@@ -2,9 +2,12 @@ package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
 
 import org.apache.poi.ss.usermodel.Cell;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
 
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
+import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression.EACH_VALUE_SEPS;
+import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression.RANGE_VALUE_SEPS;
 
 /**
  * Created by SS on 2016/08/12.
@@ -22,6 +25,8 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
     private Cell convertStrCell;
 
     private Cell convertTypeCell;
+
+    private int[] nos;
 
     private int no;
 
@@ -49,7 +54,7 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
             return;
         }
 
-        if(displaySpecificationParseOn) {
+        if (displaySpecificationParseOn) {
             velocityTemplate.getDisplaySpecificationList().add(this);
             expand();
         }
@@ -64,6 +69,12 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
             if (cellValue instanceof String) {
                 if (configGenVm().getMarkingString_displaySpecification().equals((String) cellValue)) {
                     displaySpecificationParseOn = true;
+                }
+                if (!PoiUtil.splitCheck(cellValue, EACH_VALUE_SEPS)) {
+                    return false;
+                }
+                if (!PoiUtil.splitCheck(cellValue, RANGE_VALUE_SEPS)) {
+                    return false;
                 }
                 return true;
             }
@@ -93,6 +104,14 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
 
     public void setNo(int no) {
         this.no = no;
+    }
+
+    public int[] getNos() {
+        return nos;
+    }
+
+    public void setNos(int[] nos) {
+        this.nos = nos;
     }
 
     public String getExplain() {
@@ -128,11 +147,22 @@ public class DisplaySpecification implements IfVelocityTemplateElement {
     }
 
     private void expand() {
-        setNo(PoiUtil.getRowNum(noCell));
-        setExplain(explainCell.getStringCellValue());
-        setTargetStr(targetStrCell.getStringCellValue());
-        setConvertStr(convertStrCell.getStringCellValue());
-        setConvertType(convertTypeCell.getStringCellValue());
+        if (noCell != null) {
+            setNo(PoiUtil.getRowNum(noCell));
+            setNos(PoiUtil.getRowNums(noCell, EACH_VALUE_SEPS));
+        }
+        if (explainCell != null) {
+            setExplain(explainCell.getStringCellValue());
+        }
+        if (targetStrCell != null) {
+            setTargetStr(targetStrCell.getStringCellValue());
+        }
+        if (convertStrCell != null) {
+            setConvertStr(convertStrCell.getStringCellValue());
+        }
+        if (convertTypeCell != null) {
+            setConvertType(convertTypeCell.getStringCellValue());
+        }
     }
 
 }

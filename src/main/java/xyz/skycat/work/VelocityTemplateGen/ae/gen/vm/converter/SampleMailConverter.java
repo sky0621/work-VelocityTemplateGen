@@ -48,14 +48,16 @@ public class SampleMailConverter {
             for (SampleMail sampleMail : sampleMailList) {
                 String example = sampleMail.getExample();
                 for (DisplaySpecification displaySpecification : displaySpecificationList) {
-                    if (sampleMail.getNo() == displaySpecification.getNo()) {
-                        // 変動項目を $ 変数置換
-                        example = replaceByConvertStr(example, displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
+                    if (isNotTarget(sampleMail.getNo(), displaySpecification.getNo(), displaySpecification.getNos())) {
+                        continue;
+                    }
 
-                        // インクルード変換用のケース
-                        if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
-                            example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType);
-                        }
+                    // 変動項目を $ 変数置換
+                    example = replaceByConvertStr(example, displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
+
+                    // インクルード変換用のケース
+                    if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
+                        example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType);
                     }
                 }
                 aggregateResult(example);
@@ -66,6 +68,21 @@ public class SampleMailConverter {
             return false;
         }
 
+        return true;
+    }
+
+    private boolean isNotTarget(int sampleMailNo, int displaySpecificationNo, int[] displaySpecificationNos) {
+        if (sampleMailNo == displaySpecificationNo) {
+            return false;
+        }
+        if (displaySpecificationNos == null) {
+            return true;
+        }
+        for (int no : displaySpecificationNos) {
+            if (sampleMailNo == no) {
+                return false;
+            }
+        }
         return true;
     }
 

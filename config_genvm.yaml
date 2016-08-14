@@ -20,15 +20,14 @@ colIdx_displaySpecification_convertType: 9
 # 解析行判定マーキング用
 markingString_displaySpecification: "表示仕様"
 markingString_systemColumn: "システム補足表示仕様"
-skipString_displaySpecification: "項目番号"
 # その他
 # 　インクルードを表す置換変数の一部
 includeConvertStr: "$INCLUDE$"
-# 　置換変数に付加するプレフィックス
-prefixConvertString: "bean."
 # 　VMの種別が「本体」の場合の文字列
 templateFileTypeMain: "本体"
 # 　出力ファイルの拡張子
 outputFileSuffix: ".vm"
 # 　VMファイルのインクルード時のパス
 includeVMpath: "mail/template/parts/"
+# 　差し込みファイルを表す置換変数の一部
+plubTextStr: "$PLUGTEXT$"
