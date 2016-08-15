@@ -100,7 +100,16 @@ public class SampleMailConverter {
                             }
                             break;
                         case ANYLINE_SURROUND:
-
+                            int[] nos = separateOutSpecification.getNos();
+                            int from = nos[0];
+                            int to = nos[nos.length - 1];
+                            // Oops...
+                            String[] systemExpressions = systemExpression.split(System.getProperty("line.separator"));
+                            if (systemExpressions != null && systemExpressions.length == 1) {
+                                systemExpressions = systemExpression.split("\n");
+                            }
+                            // TODO ここから
+                            System.out.println("aa");
                             break;
                         default:
                             // TODO Log?
