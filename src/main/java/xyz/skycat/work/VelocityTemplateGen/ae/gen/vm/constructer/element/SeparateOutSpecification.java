@@ -1,6 +1,7 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
 
 import org.apache.poi.ss.usermodel.Cell;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.SeparateOutSpecificationConvertMethod;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
 
@@ -25,7 +26,7 @@ public class SeparateOutSpecification implements IfVelocityTemplateElement {
 
     private Cell systemExpressionCell;
 
-    private Cell newLineExistsCell;
+    private Cell convertMethodCell;
 
     private int[] nos;
 
@@ -39,7 +40,7 @@ public class SeparateOutSpecification implements IfVelocityTemplateElement {
 
     private String systemExpression;
 
-    private boolean newLineExists;
+    private SeparateOutSpecificationConvertMethod convertMethod;
 
     public SeparateOutSpecification(
             Cell noCell,
@@ -47,13 +48,13 @@ public class SeparateOutSpecification implements IfVelocityTemplateElement {
             Cell conditionCell,
             Cell systemConvertStrTargetCell,
             Cell systemExpressionCell,
-            Cell newLineExistsCell) {
+            Cell convertMethodCell) {
         this.noCell = noCell;
         this.explainCell = explainCell;
         this.conditionCell = conditionCell;
         this.systemConvertStrTargetCell = systemConvertStrTargetCell;
         this.systemExpressionCell = systemExpressionCell;
-        this.newLineExistsCell = newLineExistsCell;
+        this.convertMethodCell = convertMethodCell;
     }
 
     @Override
@@ -156,12 +157,12 @@ public class SeparateOutSpecification implements IfVelocityTemplateElement {
         this.systemExpression = systemExpression;
     }
 
-    public boolean isNewLineExists() {
-        return newLineExists;
+    public SeparateOutSpecificationConvertMethod getConvertMethod() {
+        return convertMethod;
     }
 
-    public void setNewLineExists(boolean newLineExists) {
-        this.newLineExists = newLineExists;
+    public void setConvertMethod(SeparateOutSpecificationConvertMethod convertMethod) {
+        this.convertMethod = convertMethod;
     }
 
     private void expand() {
@@ -186,8 +187,8 @@ public class SeparateOutSpecification implements IfVelocityTemplateElement {
         if (systemExpressionCell != null) {
             setSystemExpression(systemExpressionCell.getStringCellValue());
         }
-        if (newLineExistsCell != null) {
-            setNewLineExists(PoiUtil.getBooleanValue(newLineExistsCell));
+        if (convertMethodCell != null) {
+            setConvertMethod(PoiUtil.getSeparateOutSpecificationConvertMethod(convertMethodCell));
         }
     }
 

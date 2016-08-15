@@ -29,7 +29,7 @@ public class SeparateOutSpecificationRowParser implements IfRowParser {
                 row.getCell(configGenVm().getColIdx_separateOutSpecification_condition()),
                 row.getCell(configGenVm().getColIdx_separateOutSpecification_systemConvertStrTarget()),
                 row.getCell(configGenVm().getColIdx_separateOutSpecification_systemExpression()),
-                row.getCell(configGenVm().getColIdx_separateOutSpecification_newLineExists())
+                row.getCell(configGenVm().getColIdx_separateOutSpecification_convertMethod())
         ));
 
         return true;

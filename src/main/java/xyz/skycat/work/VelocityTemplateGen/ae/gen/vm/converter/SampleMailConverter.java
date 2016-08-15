@@ -87,16 +87,23 @@ public class SampleMailConverter {
                     String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget(), templateFileType);
                     String systemExpression = separateOutSpecification.getSystemExpression();
 
-                    if (separateOutSpecification.isNewLineExists()) {
-                        // 行番号が一致していたら、丸ごと置換
-                        if (sampleMail.getNo() == separateOutSpecification.getNo() || isWithin(separateOutSpecification.getNos(), sampleMail.getNo())) {
-                            example = systemExpression;
-                        }
-                    } else {
-                        // 丸ごとではない場合は、置換対象ターゲットが一致していたら、その部分をシステム表現で置換
-                        if (example.contains(systemConvertStrTarget)) {
-                            example = example.replace(systemConvertStrTarget, systemExpression);
-                        }
+                    switch (separateOutSpecification.getConvertMethod()) {
+                        case TARGET_ONLY:
+                            if (example.contains(systemConvertStrTarget)) {
+                                example = example.replace(systemConvertStrTarget, systemExpression);
+                            }
+                            break;
+                        case LINE_REPLACE:
+                            // 行番号が一致していたら、丸ごと置換
+                            if (sampleMail.getNo() == separateOutSpecification.getNo() || isWithin(separateOutSpecification.getNos(), sampleMail.getNo())) {
+                                example = systemExpression;
+                            }
+                            break;
+                        case ANYLINE_SURROUND:
+
+                            break;
+                        default:
+                            // TODO Log?
                     }
                 }
 

@@ -60,7 +60,7 @@ public class ConfigGenVm {
 
     private int colIdx_separateOutSpecification_systemExpression;
 
-    private int colIdx_separateOutSpecification_newLineExists;
+    private int colIdx_separateOutSpecification_convertMethod;
 
     private String outputFileSuffix;
 
@@ -270,12 +270,12 @@ public class ConfigGenVm {
         this.colIdx_separateOutSpecification_systemExpression = colIdx_separateOutSpecification_systemExpression;
     }
 
-    public int getColIdx_separateOutSpecification_newLineExists() {
-        return colIdx_separateOutSpecification_newLineExists;
+    public int getColIdx_separateOutSpecification_convertMethod() {
+        return colIdx_separateOutSpecification_convertMethod;
     }
 
-    public void setColIdx_separateOutSpecification_newLineExists(int colIdx_separateOutSpecification_newLineExists) {
-        this.colIdx_separateOutSpecification_newLineExists = colIdx_separateOutSpecification_newLineExists;
+    public void setColIdx_separateOutSpecification_convertMethod(int colIdx_separateOutSpecification_convertMethod) {
+        this.colIdx_separateOutSpecification_convertMethod = colIdx_separateOutSpecification_convertMethod;
     }
 
     public String getOutputFileSuffix() {

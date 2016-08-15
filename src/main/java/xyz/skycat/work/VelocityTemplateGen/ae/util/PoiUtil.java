@@ -2,10 +2,12 @@ package xyz.skycat.work.VelocityTemplateGen.ae.util;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.SeparateOutSpecificationConvertMethod;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.SeparateOutSpecificationConvertMethod.TARGET_ONLY;
 import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.NoExpression.RANGE_VALUE_SEPS;
 
 /**
@@ -38,6 +40,15 @@ public class PoiUtil {
             return cell.getBooleanCellValue();
         }
         return false;
+    }
+
+    public static SeparateOutSpecificationConvertMethod getSeparateOutSpecificationConvertMethod(Cell cell) {
+        Object cellValue = getCellValue(cell);
+        if (cellValue instanceof String) {
+            String str = (String)cellValue;
+            return SeparateOutSpecificationConvertMethod.enumOf(str);
+        }
+        return TARGET_ONLY;
     }
 
     public static int getRowNum(Cell noCell) {

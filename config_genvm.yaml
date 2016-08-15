@@ -23,7 +23,7 @@ colIdx_separateOutSpecification_explain: 6
 colIdx_separateOutSpecification_condition: 7
 colIdx_separateOutSpecification_systemConvertStrTarget: 8
 colIdx_separateOutSpecification_systemExpression: 9
-colIdx_separateOutSpecification_newLineExists: 10
+colIdx_separateOutSpecification_convertMethod: 10
 # 解析行判定マーキング用
 markingString_displaySpecification: "表示仕様"
 markingString_separateOutSpecification: "出し分け仕様"
