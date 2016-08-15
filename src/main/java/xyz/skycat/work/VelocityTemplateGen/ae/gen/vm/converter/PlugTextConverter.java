@@ -8,10 +8,10 @@ import static xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpres
  */
 public class PlugTextConverter {
 
-    public static String createPlugTextString(String example, String convertStr) {
+    public static String createPlugTextString(String example, String convertStr, String templateFileType) {
 
         String plugTextVarBase = convertStr.replace(configGenVm().getPlubTextStr(), "");
-        return example.replace(example, exp(plugTextVarBase));
+        return example.replace(example, exp(plugTextVarBase, templateFileType));
     }
 
 }

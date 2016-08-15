@@ -37,10 +37,6 @@ public class SampleMailConverter {
         convertResultList = new ArrayList<>();
     }
 
-    private void aggregateResult(String src) {
-        convertResultList.add(src);
-    }
-
     public String getResult() {
         StringBuilder sb = new StringBuilder();
         for (String convertResult : convertResultList) {
@@ -55,7 +51,9 @@ public class SampleMailConverter {
             displaySpecificationList.sort(comparing(x -> x.getTargetStr().length(), reverseOrder()));
 
             for (SampleMail sampleMail : sampleMailList) {
+
                 String example = sampleMail.getExample();
+
                 /*
                  * メール文例の変動項目を置換変数に変えていく
                  */
@@ -65,7 +63,7 @@ public class SampleMailConverter {
                     }
 
                     // 変動項目を $ 変数置換
-                    example = replaceByConvertStr(example, displaySpecification.getTargetStr(), displaySpecification.getConvertStr());
+                    example = replaceByConvertStr(example, displaySpecification.getTargetStr(), displaySpecification.getConvertStr(), templateFileType);
 
                     // インクルード変換用のケース
                     if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
@@ -74,11 +72,7 @@ public class SampleMailConverter {
 
                     // 差し込み変換用のケース
                     if (displaySpecification.getConvertStr().startsWith(configGenVm().getPlubTextStr())) {
-                        example = PlugTextConverter.createPlugTextString(example, displaySpecification.getConvertStr());
-                        if (convertResultList.contains(example)) {
-                            example = "<<<追加しない>>>";
-                            continue;
-                        }
+                        example = PlugTextConverter.createPlugTextString(example, displaySpecification.getConvertStr(), templateFileType);
                     }
                 }
 
@@ -90,19 +84,23 @@ public class SampleMailConverter {
                         continue;
                     }
 
-                    String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget());
+                    String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget(), templateFileType);
                     String systemExpression = separateOutSpecification.getSystemExpression();
-                    if (example.contains(systemConvertStrTarget)) {
-                        if (separateOutSpecification.isNewLineExists()) {
-                            example = example.replace(systemConvertStrTarget, systemExpression);
-                        } else {
+
+                    if (separateOutSpecification.isNewLineExists()) {
+                        // 行番号が一致していたら、丸ごと置換
+                        if (sampleMail.getNo() == separateOutSpecification.getNo() || isWithin(separateOutSpecification.getNos(), sampleMail.getNo())) {
+                            example = systemExpression;
+                        }
+                    } else {
+                        // 丸ごとではない場合は、置換対象ターゲットが一致していたら、その部分をシステム表現で置換
+                        if (example.contains(systemConvertStrTarget)) {
                             example = example.replace(systemConvertStrTarget, systemExpression);
                         }
                     }
                 }
-                if (!"<<<追加しない>>>".equals(example)) {
-                    aggregateResult(example);
-                }
+
+                convertResultList.add(example);
             }
         } catch (Exception e) {
             // TODO error handling.
@@ -111,6 +109,13 @@ public class SampleMailConverter {
         }
 
         return true;
+    }
+
+    private boolean isWithin(int[] whole, int target) {
+        for (int a : whole) {
+            if (a == target) return true;
+        }
+        return false;
     }
 
     private boolean isNotTarget(int sampleMailNo, int specificationNo, int[] specificationNos) {
@@ -152,8 +157,8 @@ public class SampleMailConverter {
         this.separateOutSpecificationList = separateOutSpecificationList;
     }
 
-    private String replaceByConvertStr(String example, String convertFrom, String convertTo) {
-        return example.replace(convertFrom, exp(convertTo));
+    private String replaceByConvertStr(String example, String convertFrom, String convertTo, String templateFileType) {
+        return example.replace(convertFrom, exp(convertTo, templateFileType));
     }
 
 }

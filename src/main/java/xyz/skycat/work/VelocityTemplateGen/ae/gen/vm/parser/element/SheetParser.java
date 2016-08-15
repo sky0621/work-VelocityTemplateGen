@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
 
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ public class SheetParser {
 
         // Oops...
         DisplaySpecification.setDisplaySpecificationParseOn(false);
+        SeparateOutSpecification.setSeparateOutSpecificationParseOn(false);
 
         VelocityTemplate velocityTemplate = new VelocityTemplate();
         for (Row row : sheet) {

@@ -1,5 +1,7 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter;
 
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpression;
+
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
 
 /**
@@ -11,12 +13,7 @@ public class IncludeConverter {
 
         String includeFileNameBase = convertStr.replace(configGenVm().getIncludeConvertStr(), "");
 
-        String setStrPrefix = "$parts.";
-        if (configGenVm().getTemplateFileTypeMain().equals(templateFileType)) {
-            setStrPrefix = "$bean.";
-        }
-
-        String setStr = "#set($parts = " + setStrPrefix + includeFileNameBase + "Bean)";
+        String setStr = "#set($parts = $" + VarExpression.getVarPrefix(templateFileType) + includeFileNameBase + "Bean)";
         String parseStr = "#parse(\"" + configGenVm().getIncludeVMpath() + includeFileNameBase + configGenVm().getOutputFileSuffix() + "\")";
 
         return setStr + System.getProperty("line.separator") + parseStr;
