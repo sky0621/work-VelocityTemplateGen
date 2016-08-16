@@ -5,9 +5,11 @@ import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.Display
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpression;
+import xyz.skycat.work.VelocityTemplateGen.ae.util.VarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.reverseOrder;
@@ -38,11 +40,8 @@ public class SampleMailConverter {
     }
 
     public String getResult() {
-        StringBuilder sb = new StringBuilder();
-        for (String convertResult : convertResultList) {
-            sb.append(convertResult).append(System.getProperty("line.separator"));
-        }
-        return sb.toString();
+        String res = VarUtil.list2String(convertResultList);
+        return res;
     }
 
     public boolean convert() {
@@ -76,48 +75,77 @@ public class SampleMailConverter {
                     }
                 }
 
-                /*
-                 * 出し分け仕様を反映していく
-                 */
-                for (SeparateOutSpecification separateOutSpecification : separateOutSpecificationList) {
-                    if (isNotTarget(sampleMail.getNo(), separateOutSpecification.getNo(), separateOutSpecification.getNos())) {
-                        continue;
-                    }
-
-                    String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget(), templateFileType);
-                    String systemExpression = separateOutSpecification.getSystemExpression();
-
-                    switch (separateOutSpecification.getConvertMethod()) {
-                        case TARGET_ONLY:
-                            if (example.contains(systemConvertStrTarget)) {
-                                example = example.replace(systemConvertStrTarget, systemExpression);
-                            }
-                            break;
-                        case LINE_REPLACE:
-                            // 行番号が一致していたら、丸ごと置換
-                            if (sampleMail.getNo() == separateOutSpecification.getNo() || isWithin(separateOutSpecification.getNos(), sampleMail.getNo())) {
-                                example = systemExpression;
-                            }
-                            break;
-                        case ANYLINE_SURROUND:
-                            int[] nos = separateOutSpecification.getNos();
-                            int from = nos[0];
-                            int to = nos[nos.length - 1];
-                            // Oops...
-                            String[] systemExpressions = systemExpression.split(System.getProperty("line.separator"));
-                            if (systemExpressions != null && systemExpressions.length == 1) {
-                                systemExpressions = systemExpression.split("\n");
-                            }
-                            // TODO ここから
-                            System.out.println("aa");
-                            break;
-                        default:
-                            // TODO Log?
-                    }
-                }
-
                 convertResultList.add(example);
             }
+
+            /*
+             * 出し分け仕様を反映していく
+             */
+            for (SeparateOutSpecification separateOutSpecification : separateOutSpecificationList) {
+                // ターゲットの行番号
+                int targetNo = separateOutSpecification.getNo();
+                int[] targetNos = separateOutSpecification.getNos();
+                if (targetNo == 0 && (targetNos == null || targetNos.length == 0)) {
+                    continue;
+                }
+
+                String systemConvertStrTarget = VarExpression.exp(separateOutSpecification.getSystemConvertStrTarget(), templateFileType);
+                String systemExpression = separateOutSpecification.getSystemExpression();
+
+                // 置換方式に応じて１行ないし複数行を置換
+                switch (separateOutSpecification.getConvertMethod()) {
+                    case TARGET_ONLY:
+                        String orgElement = convertResultList.get(targetNo - 1);
+                        String cgdElement = orgElement.replace(systemConvertStrTarget, systemExpression);
+                        convertResultList.set(targetNo - 1, cgdElement);
+                        break;
+                    case LINE_REPLACE:
+                        convertResultList.set(targetNo - 1, systemExpression);
+                        break;
+                    case ANYLINE_SURROUND:
+                        /*
+                         * 置換前の内容を１行の文字列化
+                         */
+                        List<String> beforeList = new ArrayList<>();
+                        for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
+                            beforeList.add(convertResultList.get(from));
+                        }
+                        String beforeText = VarUtil.list2String(beforeList);
+                        /*
+                         * 置換後のシステム表現を１行の文字列化（※置換前の内容取込も行う）
+                         */
+                        String[] systemExpressions = systemExpression.split(System.getProperty("line.separator"));
+                        // Oops...
+                        if (systemExpressions != null && systemExpressions.length == 1) {
+                            systemExpressions = systemExpression.split("\n");
+                        }
+                        List<String> afterList = new ArrayList<>();
+                        for (String systemExpressionParts : systemExpressions) {
+                            if ("[[[置換前の内容]]]".equals(systemExpressionParts)) {
+                                afterList.add(beforeText);
+                            } else {
+                                afterList.add(systemExpressionParts);
+                            }
+                        }
+                        String afterText = VarUtil.list2String(afterList);
+
+                        // Ooooooooops........
+                        boolean isSet = false;
+                        for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
+                            if (isSet) {
+                                convertResultList.set(from, "UUUunsetUUU");
+                            } else {
+                                convertResultList.set(from, afterText);
+                                isSet = true;
+                            }
+                        }
+                        break;
+                    default:
+                        // TODO Log?
+                }
+            }
+
+            convertResultList = convertResultList.stream().filter(ele -> !ele.equals("UUUunsetUUU")).collect(Collectors.toList());
         } catch (Exception e) {
             // TODO error handling.
             e.printStackTrace();
@@ -125,13 +153,6 @@ public class SampleMailConverter {
         }
 
         return true;
-    }
-
-    private boolean isWithin(int[] whole, int target) {
-        for (int a : whole) {
-            if (a == target) return true;
-        }
-        return false;
     }
 
     private boolean isNotTarget(int sampleMailNo, int specificationNo, int[] specificationNos) {

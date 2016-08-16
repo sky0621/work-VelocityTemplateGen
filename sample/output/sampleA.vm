@@ -21,13 +21,19 @@ $!{bean.floorNo}階 $!{bean.columnsNo}列 $!{bean.seatNoFrom}番#if(${bean.seatN
 ■決済方法
 $!{bean.paymentMethod}
 登録名:$!{bean.paymentType}
+#if(${bean.paymentType})
 ■引取方法
 $!{bean.takeOffMethod}
+#else
+◆引取ほうほう
+これは、代替のテキストです。
+#end
 お届け先:基本情報
 ◆決済について
 ご登録の決済方法にてお支払い手続きは完了しています。
 ご購入後のチケットの変更・キャンセルはできません。
 
+#if(${bean.takeOffMethod})
 ◆チケットの発送について
 チケットはゆうメール(簡易書留扱い)にてお届けいたします。
 配達時にご不在の場合、不在通知票が投函されますのでご確認ください。
@@ -40,6 +46,7 @@ $!{bean.takeOffMethod}
 公演日の1週間前になってもチケットがお手元に届かない場合は、 チケットぴあメールセンターまでお問い合わせください。
 チケットぴあメールセンター (営業時間 10:00-18:00)
 電話:0570-02-9596
+#end
 
 ☆★せっかくチケットを買ったのに…… 
 急用でコンサートやお芝居に行けなくなってしまった経験ありませんか?
@@ -57,4 +64,3 @@ $!{bean.plugTextNotice}
 
 #set($parts = $bean.footerBean)
 #parse("mail/template/parts/footer.vm")
-
