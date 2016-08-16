@@ -38,7 +38,11 @@ public class VelocityTemplate {
     }
 
     public String getTemplateFileName() {
-        return configGenVm().getOutputDir() + File.separator + templateFileName + configGenVm().getOutputFileSuffix();
+        String parts = "";
+        if (!configGenVm().getTemplateFileTypeMain().equals(templateFileType)) {
+            parts = File.separator + "parts";
+        }
+        return configGenVm().getOutputDir() + parts + File.separator + templateFileName + configGenVm().getOutputFileSuffix();
     }
 
     public void setTemplateFileName(String templateFileName) {

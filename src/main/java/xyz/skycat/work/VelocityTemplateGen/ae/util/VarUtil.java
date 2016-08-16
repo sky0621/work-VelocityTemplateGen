@@ -16,11 +16,4 @@ public class VarUtil {
         return sb.toString();
     }
 
-    public static boolean isWithin(int[] whole, int target) {
-        for (int a : whole) {
-            if (a == target) return true;
-        }
-        return false;
-    }
-
 }

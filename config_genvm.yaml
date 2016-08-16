@@ -1,6 +1,6 @@
 # 入出力
 inputDir: "sample/input"
-outputDir: "sample/output"
+outputDir: "mail/template"
 # 行インデックス
 lineIdx_templateFileName: 1
 lineIdx_sampleMail: 4
