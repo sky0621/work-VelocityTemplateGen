@@ -1,4 +1,4 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.config;
+package xyz.skycat.work.VelocityTemplateGen.ae.config;
 
 /**
  * Created by SS on 2016/08/12.
@@ -29,7 +29,10 @@ public class ConfigGenVm {
     // VMが本体か部品であるかがある列Index
     private int colIdx_templateFileType;    // J列
 
-    // 冒頭の部品セット文
+    // Bean生成時のクラスコメント列Index
+    private int colIdx_templateFileComment; // K列
+
+    // 冒頭の部品セット文の列Index
     private int colIdx_templateSetString;   // L列
 
     // No列がある列Index
@@ -135,6 +138,14 @@ public class ConfigGenVm {
 
     public void setColIdx_templateFileType(int colIdx_templateFileType) {
         this.colIdx_templateFileType = colIdx_templateFileType;
+    }
+
+    public int getColIdx_templateFileComment() {
+        return colIdx_templateFileComment;
+    }
+
+    public void setColIdx_templateFileComment(int colIdx_templateFileComment) {
+        this.colIdx_templateFileComment = colIdx_templateFileComment;
     }
 
     public int getColIdx_templateSetString() {

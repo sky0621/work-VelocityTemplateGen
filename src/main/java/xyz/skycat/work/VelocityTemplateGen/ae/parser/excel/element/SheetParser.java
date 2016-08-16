@@ -1,14 +1,12 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element;
+package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.DisplaySpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.SeparateOutSpecification;
 
 import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 /**
  * Created by SS on 2016/08/12.

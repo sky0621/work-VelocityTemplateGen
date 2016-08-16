@@ -1,12 +1,12 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.row;
+package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.row;
 
 import org.apache.poi.ss.usermodel.Row;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateFileNameIf;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateFileTypeIf;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateSetString;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.CellParser;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.IfRowParser;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileNameIf;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileTypeIf;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateSetString;
+import xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.CellParser;
+import xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.IfRowParser;
 
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;
 

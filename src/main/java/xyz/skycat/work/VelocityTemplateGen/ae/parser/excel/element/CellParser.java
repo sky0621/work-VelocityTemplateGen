@@ -1,7 +1,7 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element;
+package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element;
 
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.IfVelocityTemplateElement;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.IfVelocityTemplateElement;
 
 /**
  * Created by SS on 2016/08/12.

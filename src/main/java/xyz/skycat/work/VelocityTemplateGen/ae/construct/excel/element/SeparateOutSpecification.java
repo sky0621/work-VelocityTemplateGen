@@ -1,8 +1,8 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
+package xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element;
 
 import org.apache.poi.ss.usermodel.Cell;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.SeparateOutSpecificationConvertMethod;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.PoiUtil;
 
 import static xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager.configGenVm;

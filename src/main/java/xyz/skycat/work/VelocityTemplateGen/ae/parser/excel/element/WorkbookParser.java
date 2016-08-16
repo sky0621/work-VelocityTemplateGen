@@ -1,8 +1,8 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element;
+package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
 
 import java.util.ArrayList;
 import java.util.List;

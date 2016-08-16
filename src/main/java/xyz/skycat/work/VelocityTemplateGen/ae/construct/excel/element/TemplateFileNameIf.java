@@ -1,7 +1,7 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element;
+package xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element;
 
 import org.apache.poi.ss.usermodel.Cell;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
 
 /**
  * Created by SS on 2016/08/12.

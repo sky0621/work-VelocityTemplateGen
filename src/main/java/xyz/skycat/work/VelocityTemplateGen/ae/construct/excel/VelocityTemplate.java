@@ -1,9 +1,8 @@
-package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer;
+package xyz.skycat.work.VelocityTemplateGen.ae.construct.excel;
 
-import xyz.skycat.work.VelocityTemplateGen.ae.config.ConfigManager;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.DisplaySpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.SampleMail;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.SeparateOutSpecification;
 
 import java.io.File;
 import java.util.ArrayList;

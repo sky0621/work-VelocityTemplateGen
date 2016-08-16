@@ -2,7 +2,6 @@ package xyz.skycat.work.VelocityTemplateGen.ae.config;
 
 import org.yaml.snakeyaml.Yaml;
 import xyz.skycat.work.VelocityTemplateGen.ae.error.VelocityTemplateGenException;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.config.ConfigGenVm;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

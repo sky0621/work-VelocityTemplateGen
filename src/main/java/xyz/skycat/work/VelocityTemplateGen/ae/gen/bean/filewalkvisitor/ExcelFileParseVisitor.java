@@ -1,8 +1,8 @@
-package xyz.skycat.work.VelocityTemplateGen.ae;
+package xyz.skycat.work.VelocityTemplateGen.ae.gen.bean.filewalkvisitor;
 
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter.SampleMailConverter;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.ExcelParser;
+import xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.MailDefinitionExcelParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.FilesUtil;
 
 import java.io.IOException;
@@ -19,9 +19,9 @@ import java.util.Optional;
  */
 public class ExcelFileParseVisitor implements FileVisitor<Path> {
 
-    private ExcelParser parser;
+    private MailDefinitionExcelParser parser;
 
-    public ExcelFileParseVisitor(ExcelParser parser) {
+    public ExcelFileParseVisitor(MailDefinitionExcelParser parser) {
         this.parser = parser;
     }
 
@@ -41,17 +41,18 @@ public class ExcelFileParseVisitor implements FileVisitor<Path> {
                         if (velocityTemplate == null) {
                             // TODO Nothing to do ?
                         } else {
-                            SampleMailConverter sampleMailConverter = new SampleMailConverter(velocityTemplate);
-
-                            if (sampleMailConverter.convert()) {
-                                // 出力
-                                FilesUtil.outputInit(velocityTemplate.getTemplateFileName());
-                                String setStr = velocityTemplate.getTemplateSetString();
-                                if (setStr != null && !setStr.equals("")) {
-                                    FilesUtil.output(velocityTemplate.getTemplateFileName(), setStr);
-                                }
-                                FilesUtil.output(velocityTemplate.getTemplateFileName(), sampleMailConverter.getResult());
-                            }
+                            // FIXME Beanクラス生成用のコンバータを実装！！！
+//                            SampleMailConverter sampleMailConverter = new SampleMailConverter(velocityTemplate);
+//
+//                            if (sampleMailConverter.convert()) {
+//                                // 出力
+//                                FilesUtil.outputInit(velocityTemplate.getTemplateFileName());
+//                                String setStr = velocityTemplate.getTemplateSetString();
+//                                if (setStr != null && !setStr.equals("")) {
+//                                    FilesUtil.output(velocityTemplate.getTemplateFileName(), setStr);
+//                                }
+//                                FilesUtil.output(velocityTemplate.getTemplateFileName(), sampleMailConverter.getResult());
+//                            }
                         }
                     }
             );

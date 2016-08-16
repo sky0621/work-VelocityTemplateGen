@@ -1,9 +1,9 @@
 package xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.converter;
 
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.DisplaySpecification;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SampleMail;
-import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.SeparateOutSpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.DisplaySpecification;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.SampleMail;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.SeparateOutSpecification;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.expression.VarExpression;
 import xyz.skycat.work.VelocityTemplateGen.ae.util.VarUtil;
 
