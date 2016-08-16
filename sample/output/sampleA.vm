@@ -62,5 +62,10 @@ $!{bean.plugTextNotice}
 #end
 ------
 
-#set($parts = $bean.footerBean)
+#if(${parts.other})
+#set($parts = $bean.FooterBean)
 #parse("mail/template/parts/footer.vm")
+#else
+#set($parts = $EachFooter)
+#parse("mail/template/parts/eachFooter.vm")
+#end

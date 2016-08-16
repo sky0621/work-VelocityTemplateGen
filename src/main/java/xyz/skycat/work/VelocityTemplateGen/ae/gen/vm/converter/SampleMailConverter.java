@@ -103,14 +103,19 @@ public class SampleMailConverter {
                         convertResultList.set(targetNo - 1, systemExpression);
                         break;
                     case ANYLINE_SURROUND:
-                        /*
-                         * 置換前の内容を１行の文字列化
-                         */
-                        List<String> beforeList = new ArrayList<>();
-                        for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
-                            beforeList.add(convertResultList.get(from));
+                        String beforeText = null;
+                        if (targetNos == null) {
+                            beforeText = convertResultList.get(targetNo - 1);
+                        } else {
+                            /*
+                             * 置換前の内容を１行の文字列化
+                             */
+                            List<String> beforeList = new ArrayList<>();
+                            for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
+                                beforeList.add(convertResultList.get(from));
+                            }
+                            beforeText = VarUtil.list2String(beforeList);
                         }
-                        String beforeText = VarUtil.list2String(beforeList);
                         /*
                          * 置換後のシステム表現を１行の文字列化（※置換前の内容取込も行う）
                          */
@@ -131,12 +136,16 @@ public class SampleMailConverter {
 
                         // Ooooooooops........
                         boolean isSet = false;
-                        for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
-                            if (isSet) {
-                                convertResultList.set(from, "UUUunsetUUU");
-                            } else {
-                                convertResultList.set(from, afterText);
-                                isSet = true;
+                        if (targetNos == null) {
+                            convertResultList.set(targetNo - 1, afterText);
+                        } else {
+                            for (int from = targetNos[0] - 1; from < targetNos[targetNos.length - 1]; from++) {
+                                if (isSet) {
+                                    convertResultList.set(from, "UUUunsetUUU");
+                                } else {
+                                    convertResultList.set(from, afterText);
+                                    isSet = true;
+                                }
                             }
                         }
                         break;
@@ -145,7 +154,9 @@ public class SampleMailConverter {
                 }
             }
 
+            // 置換完了前に行ずれが起こるのを防ぐために付加しておいたダミー文言行を削除
             convertResultList = convertResultList.stream().filter(ele -> !ele.equals("UUUunsetUUU")).collect(Collectors.toList());
+
         } catch (Exception e) {
             // TODO error handling.
             e.printStackTrace();
