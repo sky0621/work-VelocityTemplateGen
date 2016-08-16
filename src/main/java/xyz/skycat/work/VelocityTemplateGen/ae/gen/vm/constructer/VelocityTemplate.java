@@ -20,6 +20,8 @@ public class VelocityTemplate {
 
     private String templateFileType;
 
+    private String templateSetString;
+
     // メール文例
     private List<SampleMail> sampleMailList;
 
@@ -49,6 +51,14 @@ public class VelocityTemplate {
 
     public void setTemplateFileType(String templateFileType) {
         this.templateFileType = templateFileType;
+    }
+
+    public String getTemplateSetString() {
+        return templateSetString;
+    }
+
+    public void setTemplateSetString(String templateSetString) {
+        this.templateSetString = templateSetString;
     }
 
     public List<SampleMail> getSampleMailList() {

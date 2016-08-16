@@ -29,12 +29,15 @@ public class SampleMailConverter {
 
     private String templateFileType;
 
+    private String templateSetString;
+
     private List<String> convertResultList;
 
     public SampleMailConverter(VelocityTemplate velocityTemplate) {
         sampleMailList = velocityTemplate.getSampleMailList();
         displaySpecificationList = velocityTemplate.getDisplaySpecificationList();
         templateFileType = velocityTemplate.getTemplateFileType();
+        templateSetString = velocityTemplate.getTemplateSetString();
         separateOutSpecificationList = velocityTemplate.getSeparateOutSpecificationList();
         convertResultList = new ArrayList<>();
     }
@@ -66,7 +69,7 @@ public class SampleMailConverter {
 
                     // インクルード変換用のケース
                     if (displaySpecification.getConvertStr().startsWith(configGenVm().getIncludeConvertStr())) {
-                        example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType);
+                        example = IncludeConverter.createIncludeString(displaySpecification.getConvertStr(), templateFileType, templateSetString);
                     }
 
                     // 差し込み変換用のケース

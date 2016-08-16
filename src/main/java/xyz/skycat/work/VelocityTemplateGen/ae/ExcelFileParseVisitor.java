@@ -43,9 +43,13 @@ public class ExcelFileParseVisitor implements FileVisitor<Path> {
                         } else {
                             SampleMailConverter sampleMailConverter = new SampleMailConverter(velocityTemplate);
 
-                            if(sampleMailConverter.convert()) {
+                            if (sampleMailConverter.convert()) {
                                 // 出力
                                 FilesUtil.outputInit(velocityTemplate.getTemplateFileName());
+                                String setStr = velocityTemplate.getTemplateSetString();
+                                if (setStr != null && !setStr.equals("")) {
+                                    FilesUtil.output(velocityTemplate.getTemplateFileName(), setStr);
+                                }
                                 FilesUtil.output(velocityTemplate.getTemplateFileName(), sampleMailConverter.getResult());
                             }
                         }

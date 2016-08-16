@@ -29,6 +29,9 @@ public class ConfigGenVm {
     // VMが本体か部品であるかがある列Index
     private int colIdx_templateFileType;    // J列
 
+    // 冒頭の部品セット文
+    private int colIdx_templateSetString;   // L列
+
     // No列がある列Index
     private int colIdx_sampleMail_no;
 
@@ -132,6 +135,14 @@ public class ConfigGenVm {
 
     public void setColIdx_templateFileType(int colIdx_templateFileType) {
         this.colIdx_templateFileType = colIdx_templateFileType;
+    }
+
+    public int getColIdx_templateSetString() {
+        return colIdx_templateSetString;
+    }
+
+    public void setColIdx_templateSetString(int colIdx_templateSetString) {
+        this.colIdx_templateSetString = colIdx_templateSetString;
     }
 
     public int getLineIdx_sampleMail() {

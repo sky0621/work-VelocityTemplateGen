@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Row;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.VelocityTemplate;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateFileNameIf;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateFileTypeIf;
+import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.constructer.element.TemplateSetString;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.CellParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.gen.vm.parser.element.IfRowParser;
 
@@ -26,6 +27,7 @@ public class TitleRowParser implements IfRowParser {
         CellParser cellParser = new CellParser(velocityTemplate);
         cellParser.parse(new TemplateFileNameIf(row.getCell(configGenVm().getColIdx_templateFileName())));
         cellParser.parse(new TemplateFileTypeIf(row.getCell(configGenVm().getColIdx_templateFileType())));
+        cellParser.parse(new TemplateSetString(row.getCell(configGenVm().getColIdx_templateSetString())));
 
         return true;
     }

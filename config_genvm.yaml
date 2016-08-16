@@ -8,6 +8,7 @@ lineIdx_sampleMail: 4
 # 　VMファイル名関連行
 colIdx_templateFileName: 8
 colIdx_templateFileType: 9
+colIdx_templateSetString: 11
 # 　サンプルメール関連行
 colIdx_sampleMail_no: 0
 colIdx_sampleMail_example: 2

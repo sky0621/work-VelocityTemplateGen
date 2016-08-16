@@ -62,7 +62,7 @@ $!{bean.plugTextNotice}
 #end
 ------
 
-#if(${parts.other})
+#if(${bean.isCommon})
 #set($parts = $bean.FooterBean)
 #parse("mail/template/parts/footer.vm")
 #else
