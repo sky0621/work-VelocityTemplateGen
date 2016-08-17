@@ -19,7 +19,9 @@ public class TemplateFileComment implements IfVelocityTemplateElement {
 
         // TODO チェック処理など
 
-        velocityTemplate.setTemplateFileComment(cell.getStringCellValue());
+        if(cell!=null) {
+            velocityTemplate.setTemplateFileComment(cell.getStringCellValue());
+        }
     }
 
 }
