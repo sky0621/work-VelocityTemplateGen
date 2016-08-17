@@ -6,11 +6,11 @@ import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
 /**
  * Created by SS on 2016/08/12.
  */
-public class TemplateFileTypeIf implements IfVelocityTemplateElement {
+public class TemplateFileName implements IfVelocityTemplateElement {
 
     private Cell cell;
 
-    public TemplateFileTypeIf(Cell cell) {
+    public TemplateFileName(Cell cell) {
         this.cell = cell;
     }
 
@@ -19,7 +19,7 @@ public class TemplateFileTypeIf implements IfVelocityTemplateElement {
 
         // TODO チェック処理など
 
-        velocityTemplate.setTemplateFileType(cell.getStringCellValue());
+        velocityTemplate.setTemplateFileName(cell.getStringCellValue());
     }
 
 }

@@ -2,8 +2,8 @@ package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.row;
 
 import org.apache.poi.ss.usermodel.Row;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
-import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileNameIf;
-import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileTypeIf;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileName;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileType;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateSetString;
 import xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.CellParser;
 import xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.IfRowParser;
@@ -25,8 +25,8 @@ public class TitleRowParser implements IfRowParser {
         // TODO 例外スロー？
 
         CellParser cellParser = new CellParser(velocityTemplate);
-        cellParser.parse(new TemplateFileNameIf(row.getCell(configGenVm().getColIdx_templateFileName())));
-        cellParser.parse(new TemplateFileTypeIf(row.getCell(configGenVm().getColIdx_templateFileType())));
+        cellParser.parse(new TemplateFileName(row.getCell(configGenVm().getColIdx_templateFileName())));
+        cellParser.parse(new TemplateFileType(row.getCell(configGenVm().getColIdx_templateFileType())));
         cellParser.parse(new TemplateSetString(row.getCell(configGenVm().getColIdx_templateSetString())));
 
         return true;
