@@ -19,6 +19,8 @@ public class VelocityTemplate {
 
     private String templateFileType;
 
+    private String templateFileComment;
+
     private String templateSetString;
 
     // メール文例
@@ -54,6 +56,14 @@ public class VelocityTemplate {
 
     public void setTemplateFileType(String templateFileType) {
         this.templateFileType = templateFileType;
+    }
+
+    public String getTemplateFileComment() {
+        return templateFileComment;
+    }
+
+    public void setTemplateFileComment(String templateFileComment) {
+        this.templateFileComment = templateFileComment;
     }
 
     public String getTemplateSetString() {

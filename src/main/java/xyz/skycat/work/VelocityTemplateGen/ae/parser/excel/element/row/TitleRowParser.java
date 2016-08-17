@@ -2,6 +2,7 @@ package xyz.skycat.work.VelocityTemplateGen.ae.parser.excel.element.row;
 
 import org.apache.poi.ss.usermodel.Row;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.VelocityTemplate;
+import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileComment;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileName;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateFileType;
 import xyz.skycat.work.VelocityTemplateGen.ae.construct.excel.element.TemplateSetString;
@@ -27,6 +28,7 @@ public class TitleRowParser implements IfRowParser {
         CellParser cellParser = new CellParser(velocityTemplate);
         cellParser.parse(new TemplateFileName(row.getCell(configGenVm().getColIdx_templateFileName())));
         cellParser.parse(new TemplateFileType(row.getCell(configGenVm().getColIdx_templateFileType())));
+        cellParser.parse(new TemplateFileComment(row.getCell(configGenVm().getColIdx_templateFileComment())));
         cellParser.parse(new TemplateSetString(row.getCell(configGenVm().getColIdx_templateSetString())));
 
         return true;
