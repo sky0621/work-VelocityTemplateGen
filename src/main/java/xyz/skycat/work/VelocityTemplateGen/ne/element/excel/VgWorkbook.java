@@ -1,5 +1,8 @@
 package xyz.skycat.work.VelocityTemplateGen.ne.element.excel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by SS on 2016/08/19.
  */
@@ -7,7 +10,11 @@ public class VgWorkbook implements IfWorkbook {
 
     private String name;
 
-    private IfSheet sheet;
+    private List<IfSheet> sheetList;
+
+    public VgWorkbook() {
+        sheetList = new ArrayList<>();
+    }
 
     @Override
     public String getName() {
@@ -20,12 +27,18 @@ public class VgWorkbook implements IfWorkbook {
     }
 
     @Override
-    public IfSheet getSheet() {
-        return sheet;
+    public List<IfSheet> getSheetList() {
+        return sheetList;
     }
 
     @Override
-    public void setSheet(IfSheet sheet) {
-        this.sheet = sheet;
+    public void setSheetList(List<IfSheet> sheetList) {
+        this.sheetList = sheetList;
     }
+
+    @Override
+    public void addSheetList(IfSheet sheet) {
+        sheetList.add(sheet);
+    }
+
 }

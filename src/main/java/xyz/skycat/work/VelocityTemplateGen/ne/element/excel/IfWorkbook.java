@@ -1,5 +1,7 @@
 package xyz.skycat.work.VelocityTemplateGen.ne.element.excel;
 
+import java.util.List;
+
 /**
  * Created by SS on 2016/08/19.
  */
@@ -9,8 +11,10 @@ public interface IfWorkbook {
 
     public void setName(String name);
 
-    public IfSheet getSheet();
+    public List<IfSheet> getSheetList();
 
-    public void setSheet(IfSheet Sheet);
+    public void setSheetList(List<IfSheet> sheetList);
+
+    public void addSheetList(IfSheet sheet);
 
 }
